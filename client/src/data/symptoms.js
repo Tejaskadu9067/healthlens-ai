@@ -1,0 +1,31 @@
+const symptoms = [
+  "Abdominal Pain",
+  "Back Pain",
+  "Body Pain",
+  "Blurred Vision",
+  "Chest Pain",
+  "Chills",
+  "Constipation",
+  "Cough",
+  "Diarrhea",
+  "Dizziness",
+  "Fatigue",
+  "Fever",
+  "Headache",
+  "Joint Pain",
+  "Loss of Appetite",
+  "Muscle Pain",
+  "Nausea",
+  "Neck Pain",
+  "Runny Nose",
+  "Shortness of Breath",
+  "Skin Rash",
+  "Sneezing",
+  "Sore Throat",
+  "Sweating",
+  "Vomiting",
+  "Weakness",
+  "Weight Loss"
+];
+
+export default symptoms;

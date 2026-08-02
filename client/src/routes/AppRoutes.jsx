@@ -18,6 +18,7 @@ function AppRoutes() {
       <Route path="/prediction" element={<Prediction />} />
       <Route path="/history" element={<History />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/prediction"element={<Prediction />}/>
     </Routes>
   );
 }

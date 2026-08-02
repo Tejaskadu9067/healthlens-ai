@@ -1,24 +1,24 @@
-import Button from "../../components/ui/Button";
+import Navbar from "../../components/layout/Navbar";
+import Hero from "../../components/sections/Hero";
+import Features from "../../components/sections/Features";
+import HowItWorks from "../../components/sections/HowItWorks";
+import PredictionDemo from "../../components/sections/PredictionDemo";
+import TechnologyStack from "../../components/sections/TechnologyStack";
+import About from "../../components/sections/About";
+import Footer from "../../components/layout/Footer";
 
 function Home() {
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-6">
-      <h1 className="text-5xl font-bold text-white">
-        HealthLens AI
-      </h1>
-
-      <Button>
-        Get Started
-      </Button>
-
-      <Button variant="secondary">
-        Learn More
-      </Button>
-
-      <Button variant="danger">
-        Delete
-      </Button>
-    </div>
+    <>
+      <Navbar />
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <PredictionDemo />
+      <TechnologyStack />
+      <About />
+      <Footer />
+    </>
   );
 }
 
