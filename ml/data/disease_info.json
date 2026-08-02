@@ -1,0 +1,49 @@
+{
+  "Allergy": {
+    "description": "An allergy is an immune system reaction to substances such as pollen, dust, pet dander, or certain foods.",
+    "specialist": "Allergist / General Physician",
+    "precautions": [
+      "Avoid known allergens",
+      "Wear a mask during high pollen seasons",
+      "Keep your surroundings clean",
+      "Consult a doctor if symptoms worsen"
+    ],
+    "medicines": [
+      "Cetirizine",
+      "Loratadine",
+      "Fexofenadine"
+    ]
+  },
+
+  "Common Cold": {
+    "description": "A common viral infection affecting the nose and throat. It usually resolves within a week.",
+    "specialist": "General Physician",
+    "precautions": [
+      "Take adequate rest",
+      "Drink plenty of fluids",
+      "Avoid cold drinks",
+      "Maintain good hygiene"
+    ],
+    "medicines": [
+      "Paracetamol",
+      "Cetirizine",
+      "Cough Syrup"
+    ]
+  },
+
+  "Fungal infection": {
+    "description": "A fungal infection is caused by fungi affecting the skin, nails, or other body parts.",
+    "specialist": "Dermatologist",
+    "precautions": [
+      "Keep the affected area dry",
+      "Maintain personal hygiene",
+      "Avoid sharing towels or clothing",
+      "Complete the prescribed treatment"
+    ],
+    "medicines": [
+      "Clotrimazole",
+      "Fluconazole",
+      "Ketoconazole Cream"
+    ]
+  }
+}

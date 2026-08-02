@@ -1,82 +1,95 @@
+import { Link } from "react-router-dom";
+
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
 import HeroDashboard from "./HeroDashboard";
 
 function Hero() {
   return (
-    <section id="home" className="min-h-screen bg-slate-950 text-white flex items-center">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center px-6">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.15fr] gap-28 items-center px-8">
 
-        {/* Left Side */}
-        <div className="max-w-3xl">
+        {/* Left */}
 
-          {/* Badge */}
-          <Badge>🚀 AI Powered Healthcare</Badge>
+        <div className="max-w-xl text-white">
 
-          {/* Heading */}
-          <h1 className="text-6xl font-extrabold mt-8 leading-tight">
-            AI-powered
-            <span className="text-cyan-400"> Disease Prediction</span>
+          <Badge>
+            🚀 AI Powered Healthcare
+          </Badge>
+
+          <h1 className="mt-8 text-7xl font-black leading-[1.05]">
+
+            AI-Powered
+
+            <span className="block bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 bg-clip-text text-transparent">
+
+              Disease Prediction
+
+            </span>
+
           </h1>
 
-          {/* Description */}
-          <p className="mt-6 text-xl text-slate-400 leading-8">
-            Detect diseases from symptoms using Machine Learning,
+          <p className="mt-8 text-xl leading-10 text-slate-400">
+
+            Detect diseases intelligently using Machine Learning,
             Explainable AI and modern clinical decision support.
+
+            Fast, secure and built for the future of healthcare.
+
           </p>
 
-          {/* Buttons */}
-          <div className="flex gap-5 mt-10">
-            <Button>Predict Disease</Button>
+          <div className="flex gap-5 mt-12">
 
-            <Button variant="secondary">
-              View Demo
+            <Link to="/prediction">
+
+              <Button className="px-8 py-4 rounded-2xl">
+                Start Diagnosis
+              </Button>
+
+            </Link>
+
+            <Button
+              variant="secondary"
+              className="px-8 py-4 rounded-2xl"
+            >
+              Watch Demo
             </Button>
-          </div>
-
-          {/* Statistics */}
-          <div className="flex gap-12 mt-16 flex-wrap">
-
-            <div>
-              <h2 className="text-3xl font-bold text-cyan-400">
-                95%
-              </h2>
-
-              <p className="text-slate-400">
-                Prediction Accuracy
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold text-cyan-400">
-                200+
-              </h2>
-
-              <p className="text-slate-400">
-                Diseases Supported
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold text-cyan-400">
-                AI
-              </h2>
-
-              <p className="text-slate-400">
-                Explainable AI
-              </p>
-            </div>
 
           </div>
 
         </div>
 
-        {/* Right Side */}
-        <div className="flex justify-center">
-          <HeroDashboard />
+        {/* Right */}
+
+        <div className="relative flex justify-center lg:justify-end pt-10">
+
+          {/* Glow */}
+
+          <div
+            className="
+              absolute
+              right-0
+              w-[700px]
+              h-[700px]
+              rounded-full
+              bg-cyan-500/15
+              blur-[180px]
+            "
+          />
+
+          <div className="relative z-10">
+
+            <HeroDashboard />
+
+          </div>
+
         </div>
 
       </div>
+
     </section>
   );
 }

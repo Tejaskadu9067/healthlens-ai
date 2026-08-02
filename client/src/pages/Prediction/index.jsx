@@ -6,8 +6,7 @@ import { predictDisease } from "../../services/predictionService";
 import SymptomSearch from "../../components/prediction/SymptomSearch";
 import SelectedSymptoms from "../../components/prediction/SelectedSymptoms";
 import PredictButton from "../../components/prediction/PredictButton";
-import PredictionCard from "../../components/prediction/PredictionCard";
-import PredictionHistory from "../../components/prediction/PredictionHistory";
+import PredictionDashboard from "../../components/prediction/PredictionDashboard";
 
 function Prediction() {
   const [symptoms, setSymptoms] = useState([]);
@@ -28,7 +27,6 @@ function Prediction() {
         setSymptoms(response.data.symptoms);
       } catch (error) {
         console.error("Unable to load symptoms:", error);
-
         setError("Unable to load symptoms from the AI server.");
       }
     }
@@ -82,8 +80,6 @@ function Prediction() {
 
       const result = await predictDisease(selectedSymptoms);
 
-      console.log(result);
-
       const newPrediction = {
         ...result.prediction,
         symptoms: [...selectedSymptoms],
@@ -94,12 +90,10 @@ function Prediction() {
 
       setHistory((prev) => {
         const updated = [newPrediction, ...prev];
-
         return updated.slice(0, 5);
       });
     } catch (error) {
       console.error(error);
-
       setError("Unable to connect to the prediction server.");
     } finally {
       setLoading(false);
@@ -107,18 +101,18 @@ function Prediction() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white pt-32 pb-20">
+    <div className="relative min-h-screen text-white pt-16 pb-20">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
 
-        <div className="text-center">
+        <div className="text-center mb-12">
 
-          <h1 className="text-5xl font-extrabold">
+          <h1 className="text-4xl lg:text-5xl font-extrabold">
             AI Disease Prediction
           </h1>
 
-          <p className="mt-5 text-lg text-slate-400 max-w-3xl mx-auto leading-8">
+          <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto leading-8">
             Select your symptoms and allow our Machine Learning model
             to predict the most probable disease with confidence,
             recommendations and precautions.
@@ -128,15 +122,15 @@ function Prediction() {
 
         {/* Main Grid */}
 
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 mt-20">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12">
 
           {/* LEFT PANEL */}
 
-          <div className="space-y-10">
+          <div className="space-y-8">
 
-            {/* Search */}
+            {/* Search Card */}
 
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8">
+            <div className="glass-card glass-card-hover p-8">
 
               <SymptomSearch
                 searchTerm={searchTerm}
@@ -148,9 +142,9 @@ function Prediction() {
 
             </div>
 
-            {/* Selected Symptoms */}
+            {/* Selected Symptoms Card */}
 
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8">
+            <div className="glass-card glass-card-hover p-8">
 
               <div className="flex justify-between items-center mb-6">
 
@@ -167,7 +161,7 @@ function Prediction() {
                   {selectedSymptoms.length > 0 && (
                     <button
                       onClick={clearSymptoms}
-                      className="px-4 py-2 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition"
+                      className="px-4 py-2 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300"
                     >
                       Clear All
                     </button>
@@ -200,8 +194,6 @@ function Prediction() {
 
               )}
 
-              {/* Predict Button */}
-
               <div className="mt-10">
 
                 <PredictButton
@@ -230,18 +222,15 @@ function Prediction() {
 
           {/* RIGHT PANEL */}
 
-          <div className="space-y-8">
+          <div>
 
-            <PredictionCard
+            <PredictionDashboard
               prediction={prediction}
               loading={loading}
               selectedCount={selectedSymptoms.length}
-            />
-
-            <PredictionHistory
               history={history}
-              onSelect={selectHistory}
-              onClear={clearHistory}
+              onSelectHistory={selectHistory}
+              onClearHistory={clearHistory}
             />
 
           </div>
