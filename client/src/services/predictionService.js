@@ -19,7 +19,8 @@ export async function predictDisease(symptoms) {
 export async function getSymptoms() {
   const response = await API.get("/predictions/symptoms");
 
-  return response.data;
+  // Return ONLY the array
+  return response.data.symptoms;
 }
 
 export default API;
