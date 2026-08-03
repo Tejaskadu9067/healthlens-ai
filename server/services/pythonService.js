@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const PYTHON_API = "http://127.0.0.1:8000";
+const PYTHON_API =
+  process.env.PYTHON_API_URL || "http://127.0.0.1:8000";
 
 export async function predictDisease(symptoms = []) {
   try {
@@ -28,9 +29,7 @@ export async function getSymptoms() {
     const response = await axios.get(`${PYTHON_API}/symptoms`);
 
     return response.data.symptoms;
-
   } catch (error) {
-
     console.error(
       "Python API Error:",
       error.response?.data || error.message
