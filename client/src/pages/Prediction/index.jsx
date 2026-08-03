@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
-import { predictDisease } from "../../services/predictionService";
+import {
+  predictDisease,
+  getSymptoms,
+} from "../../services/predictionService";
 
 import SymptomSearch from "../../components/prediction/SymptomSearch";
 import SelectedSymptoms from "../../components/prediction/SelectedSymptoms";
 import PredictButton from "../../components/prediction/PredictButton";
 import PredictionDashboard from "../../components/prediction/PredictionDashboard";
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 function Prediction() {
   const [symptoms, setSymptoms] = useState([]);
@@ -22,11 +22,8 @@ function Prediction() {
   useEffect(() => {
     async function loadSymptoms() {
       try {
-        const response = await axios.get(
-          `${API_URL}/api/predictions/symptoms`
-        );
-
-        setSymptoms(response.data.symptoms);
+        const symptoms = await getSymptoms();
+        setSymptoms(symptoms);
       } catch (error) {
         console.error("Unable to load symptoms:", error);
         setError("Unable to load symptoms from the AI server.");
@@ -107,6 +104,7 @@ function Prediction() {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
+
         <div className="text-center mb-12">
 
           <h1 className="text-4xl lg:text-5xl font-extrabold">
