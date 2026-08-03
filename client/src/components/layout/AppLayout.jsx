@@ -1,17 +1,28 @@
-import AnimatedBackground from "../background/AnimatedBackground";
 import Navbar from "./Navbar";
+import AnimatedBackground from "../background/AnimatedBackground";
 
 function AppLayout({ children }) {
   return (
-    <>
+    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-white">
+      {/* Animated Background */}
       <AnimatedBackground />
 
+      {/* Fixed Navbar */}
       <Navbar />
 
-      <main className="relative z-10 pt-24 min-h-screen text-white">
+      {/* Main Content */}
+      <main
+        className="
+          relative
+          z-10
+          min-h-screen
+          pt-36
+          pb-16
+        "
+      >
         {children}
       </main>
-    </>
+    </div>
   );
 }
 
