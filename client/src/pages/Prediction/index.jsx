@@ -8,6 +8,8 @@ import SelectedSymptoms from "../../components/prediction/SelectedSymptoms";
 import PredictButton from "../../components/prediction/PredictButton";
 import PredictionDashboard from "../../components/prediction/PredictionDashboard";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Prediction() {
   const [symptoms, setSymptoms] = useState([]);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -21,7 +23,7 @@ function Prediction() {
     async function loadSymptoms() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/predictions/symptoms"
+          `${API_URL}/api/predictions/symptoms`
         );
 
         setSymptoms(response.data.symptoms);
@@ -105,7 +107,6 @@ function Prediction() {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
-
         <div className="text-center mb-12">
 
           <h1 className="text-4xl lg:text-5xl font-extrabold">
@@ -124,11 +125,9 @@ function Prediction() {
 
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12">
 
-          {/* LEFT PANEL */}
+          {/* Left Panel */}
 
           <div className="space-y-8">
-
-            {/* Search Card */}
 
             <div className="glass-card glass-card-hover p-8">
 
@@ -141,8 +140,6 @@ function Prediction() {
               />
 
             </div>
-
-            {/* Selected Symptoms Card */}
 
             <div className="glass-card glass-card-hover p-8">
 
@@ -159,12 +156,14 @@ function Prediction() {
                   </span>
 
                   {selectedSymptoms.length > 0 && (
+
                     <button
                       onClick={clearSymptoms}
                       className="px-4 py-2 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300"
                     >
                       Clear All
                     </button>
+
                   )}
 
                 </div>
@@ -203,15 +202,19 @@ function Prediction() {
                 />
 
                 {selectedSymptoms.length < 3 && (
+
                   <p className="text-red-400 text-sm mt-4">
                     Please select at least 3 symptoms.
                   </p>
+
                 )}
 
                 {error && (
+
                   <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-red-300">
                     {error}
                   </div>
+
                 )}
 
               </div>
@@ -220,20 +223,16 @@ function Prediction() {
 
           </div>
 
-          {/* RIGHT PANEL */}
+          {/* Right Panel */}
 
-          <div>
-
-            <PredictionDashboard
-              prediction={prediction}
-              loading={loading}
-              selectedCount={selectedSymptoms.length}
-              history={history}
-              onSelectHistory={selectHistory}
-              onClearHistory={clearHistory}
-            />
-
-          </div>
+          <PredictionDashboard
+            prediction={prediction}
+            loading={loading}
+            selectedCount={selectedSymptoms.length}
+            history={history}
+            onSelectHistory={selectHistory}
+            onClearHistory={clearHistory}
+          />
 
         </div>
 

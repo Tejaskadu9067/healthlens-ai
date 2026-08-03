@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from schemas import PredictionRequest
-from predictor import predict_disease, SYMPTOMS
+from .schemas import PredictionRequest
+from .predictor import predict_disease, SYMPTOMS
 
 app = FastAPI(
     title="HealthLens AI API",
