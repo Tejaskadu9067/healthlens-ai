@@ -1,53 +1,27 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import "dotenv/config";
 
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 let serviceAccount;
 
-// ======================================
-// Production / Render
-// ======================================
-
 if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-  serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT
-  );
+  try {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-  console.log("✅ Firebase Admin: using environment variable");
-}
+    serviceAccount.private_key =
+      serviceAccount.private_key.replace(/\\n/g, "\n");
 
-// ======================================
-// Local Development
-// ======================================
-
-else {
-  const localPath = path.join(
-    __dirname,
-    "../secrets/firebase-service-account.json"
-  );
-
-  if (!fs.existsSync(localPath)) {
-    throw new Error(
-      "Firebase credentials not found. Set FIREBASE_SERVICE_ACCOUNT or provide server/secrets/firebase-service-account.json"
-    );
+    console.log("✅ Firebase service account loaded from environment");
+  } catch (error) {
+    console.error("❌ Failed to parse FIREBASE_SERVICE_ACCOUNT");
+    console.error(error);
+    process.exit(1);
   }
-
-  serviceAccount = JSON.parse(
-    fs.readFileSync(localPath, "utf8")
-  );
-
-  console.log("✅ Firebase Admin: using local service account");
+} else {
+  console.error("❌ FIREBASE_SERVICE_ACCOUNT is missing");
+  process.exit(1);
 }
-
-// ======================================
-// Initialize Firebase Admin
-// ======================================
 
 if (getApps().length === 0) {
   initializeApp({
