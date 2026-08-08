@@ -1,237 +1,345 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import {
-  Link,
-  NavLink,
-  useNavigate,
-} from "react-router-dom";
+  Activity,
+  ChevronDown,
+  LayoutDashboard,
+  History,
+  LogOut,
+} from "lucide-react";
 
-import { motion } from "framer-motion";
-
-import Logo from "../ui/Logo";
-import Button from "../ui/Button";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const { user, logout } = useAuth();
+  const [open, setOpen] = useState(false);
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () =>
-      window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    {
-      name: "Home",
-      to: "/",
-    },
-    {
-      name: "Prediction",
-      to: "/prediction",
-    },
-    {
-      name: "History",
-      to: "/history",
-    },
-    {
-      name: "Dashboard",
-      to: "/dashboard",
-    },
-  ];
-
-  const handleAboutClick = () => {
-    navigate("/");
-
-    setTimeout(() => {
-      const aboutSection = document.getElementById("about");
-
-      if (aboutSection) {
-        aboutSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, 150);
-  };
+  const navClass = ({ isActive }) =>
+    `relative font-medium transition-all duration-300 hover:-translate-y-0.5 ${
+      isActive
+        ? "text-cyan-400"
+        : "text-slate-300 hover:text-cyan-400"
+    }`;
 
   return (
-    <header className="fixed top-5 left-0 w-full z-50 px-6">
-
+    <header className="px-4 pt-4 sm:px-6 lg:px-8">
       <nav
-        className={`
-          max-w-7xl
+        className="
           mx-auto
-
-          flex
-          items-center
-          justify-between
-
-          rounded-3xl
-
+          max-w-7xl
+          rounded-[28px]
           border
           border-white/10
-
-          backdrop-blur-3xl
-
-          transition-all
-          duration-500
-
-          ${
-            scrolled
-              ? "py-3 px-7 bg-slate-900/80 shadow-[0_0_60px_rgba(34,211,238,.18)]"
-              : "py-5 px-8 bg-slate-900/55 shadow-[0_0_35px_rgba(34,211,238,.08)]"
-          }
-        `}
+          bg-slate-900/70
+          backdrop-blur-2xl
+          shadow-[0_0_45px_rgba(6,182,212,0.10)]
+        "
       >
+        <div className="flex h-20 items-center justify-between px-6 lg:px-8">
 
-        {/* Logo */}
+          {/* ======================================
+              Logo
+          ====================================== */}
 
-        <Logo />
+          <Link
+            to="/"
+            className="flex items-center gap-3"
+          >
+            <div
+              className="
+                flex
+                h-12
+                w-12
+                items-center
+                justify-center
+                rounded-2xl
+                bg-gradient-to-br
+                from-cyan-500
+                to-blue-600
+                shadow-lg
+                shadow-blue-600/20
+              "
+            >
+              <Activity className="h-6 w-6 text-white" />
+            </div>
 
-        {/* Navigation */}
+            <div>
+              <h1
+                className="
+                  text-2xl
+                  font-extrabold
+                  tracking-tight
+                  text-cyan-400
+                "
+              >
+                HealthLens
+              </h1>
 
-        <div className="hidden lg:flex items-center gap-2 bg-white/5 rounded-full p-2">
+              <p className="text-[11px] font-medium tracking-wide text-slate-400">
+                AI HEALTHCARE
+              </p>
+            </div>
+          </Link>
 
-          {navLinks.map((link) => (
+          {/* ======================================
+              Navigation
+          ====================================== */}
+
+          <div className="hidden items-center gap-9 text-[15px] lg:flex">
 
             <NavLink
-              key={link.name}
-              to={link.to}
+              to="/"
+              className={navClass}
             >
-              {({ isActive }) => (
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/prediction"
+              className={navClass}
+            >
+              Prediction
+            </NavLink>
+
+            <NavLink
+              to="/history"
+              className={navClass}
+            >
+              History
+            </NavLink>
+
+            <NavLink
+              to="/dashboard"
+              className={navClass}
+            >
+              Dashboard
+            </NavLink>
+
+          </div>
+
+          {/* ======================================
+              Right Side
+          ====================================== */}
+
+          {!user ? (
+
+            /* Login Button */
+
+            <Link
+              to="/login"
+              className="
+                inline-flex
+                items-center
+                justify-center
+                rounded-xl
+                bg-gradient-to-r
+                from-cyan-500
+                to-blue-600
+                px-5
+                py-2.5
+                text-sm
+                font-semibold
+                text-white
+                shadow-lg
+                shadow-cyan-500/20
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:shadow-cyan-500/30
+              "
+            >
+              Login
+            </Link>
+
+          ) : (
+
+            /* Logged-in User */
+
+            <div className="relative">
+
+              <button
+                onClick={() => setOpen(!open)}
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-slate-800/70
+                  px-3
+                  py-2
+                  transition-all
+                  duration-300
+                  hover:bg-slate-800
+                "
+              >
+
+                <img
+                  src={user.picture}
+                  alt={user.name}
+                  className="
+                    h-10
+                    w-10
+                    rounded-full
+                    border-2
+                    border-cyan-400
+                  "
+                />
+
+                <div className="hidden text-left md:block">
+
+                  <h2 className="text-sm font-bold text-white">
+                    {user.name}
+                  </h2>
+
+                  <p className="max-w-[150px] truncate text-xs text-slate-400">
+                    {user.email}
+                  </p>
+
+                </div>
+
+                <ChevronDown
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${
+                    open ? "rotate-180" : ""
+                  }`}
+                />
+
+              </button>
+
+              {/* ======================================
+                  User Dropdown
+              ====================================== */}
+
+              {open && (
 
                 <div
                   className="
-                    relative
-                    px-5
-                    py-2.5
-                    rounded-full
-
-                    text-sm
-                    font-medium
-
-                    transition-all
-                    duration-300
-
-                    group
-                    cursor-pointer
+                    absolute
+                    right-0
+                    z-50
+                    mt-3
+                    w-64
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    border-white/10
+                    bg-slate-900/95
+                    shadow-2xl
+                    backdrop-blur-2xl
                   "
                 >
 
-                  {isActive && (
+                  {/* User Info */}
 
-                    <motion.div
-                      layoutId="navbar-pill"
+                  <div className="border-b border-white/10 p-4">
+
+                    <div className="flex items-center gap-3">
+
+                      <img
+                        src={user.picture}
+                        alt={user.name}
+                        className="h-11 w-11 rounded-full"
+                      />
+
+                      <div className="min-w-0">
+
+                        <h2 className="truncate font-bold text-white">
+                          {user.name}
+                        </h2>
+
+                        <p className="truncate text-xs text-slate-400">
+                          {user.email}
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  {/* Menu */}
+
+                  <div className="p-2">
+
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setOpen(false)}
                       className="
-                        absolute
-                        inset-0
-
-                        rounded-full
-
-                        bg-cyan-500/15
-
-                        border
-                        border-cyan-400/30
-
-                        shadow-[0_0_35px_rgba(34,211,238,.30)]
-
-                        -z-10
+                        flex
+                        items-center
+                        gap-3
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        text-slate-300
+                        transition
+                        hover:bg-slate-800
+                        hover:text-white
                       "
-                      transition={{
-                        type: "spring",
-                        stiffness: 420,
-                        damping: 32,
+                    >
+                      <LayoutDashboard className="h-4 w-4" />
+                      Dashboard
+                    </Link>
+
+                    <Link
+                      to="/history"
+                      onClick={() => setOpen(false)}
+                      className="
+                        flex
+                        items-center
+                        gap-3
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        text-slate-300
+                        transition
+                        hover:bg-slate-800
+                        hover:text-white
+                      "
+                    >
+                      <History className="h-4 w-4" />
+                      Prediction History
+                    </Link>
+
+                    <button
+                      onClick={() => {
+                        logout();
+                        setOpen(false);
                       }}
-                    />
+                      className="
+                        flex
+                        w-full
+                        items-center
+                        gap-3
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        text-red-400
+                        transition
+                        hover:bg-red-500
+                        hover:text-white
+                      "
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Logout
+                    </button>
 
-                  )}
-
-                  <span
-                    className={
-                      isActive
-                        ? "text-cyan-300"
-                        : "text-slate-300 group-hover:text-white"
-                    }
-                  >
-                    {link.name}
-                  </span>
+                  </div>
 
                 </div>
 
               )}
-            </NavLink>
 
-          ))}
+            </div>
 
-          {/* About */}
-
-          <button
-            onClick={handleAboutClick}
-            className="
-              px-5
-              py-2.5
-
-              rounded-full
-
-              text-sm
-              font-medium
-
-              text-slate-300
-
-              hover:text-white
-              hover:bg-white/5
-
-              transition-all
-              duration-300
-            "
-          >
-            About
-          </button>
+          )}
 
         </div>
-
-        {/* Right Side */}
-
-        <div className="flex items-center gap-4">
-
-          <Link
-            to="/login"
-            className="
-              px-5
-              py-2.5
-
-              rounded-full
-
-              text-slate-300
-
-              hover:text-white
-              hover:bg-white/5
-
-              transition-all
-              duration-300
-            "
-          >
-            Login
-          </Link>
-
-          <Link to="/prediction">
-
-            <Button>
-              Start Diagnosis
-            </Button>
-
-          </Link>
-
-        </div>
-
       </nav>
-
     </header>
   );
 }

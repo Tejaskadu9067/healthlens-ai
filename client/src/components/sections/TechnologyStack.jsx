@@ -6,55 +6,64 @@ function TechnologyStack() {
     {
       icon: "⚛️",
       title: "React",
-      description: "Modern frontend library for building interactive user interfaces.",
+      description:
+        "Modern frontend library for building interactive user interfaces.",
     },
     {
       icon: "🟢",
       title: "Node.js",
-      description: "Fast JavaScript runtime powering backend services.",
+      description:
+        "Fast JavaScript runtime powering backend services.",
     },
     {
       icon: "⚡",
       title: "Express.js",
-      description: "Lightweight framework for RESTful APIs.",
+      description:
+        "Lightweight framework for RESTful APIs.",
     },
     {
       icon: "🍃",
       title: "MongoDB",
-      description: "Flexible NoSQL database for storing healthcare data.",
+      description:
+        "Flexible NoSQL database for storing healthcare data.",
     },
     {
       icon: "🐍",
       title: "Python",
-      description: "Machine Learning models and AI prediction engine.",
+      description:
+        "Machine Learning models and AI prediction engine.",
     },
     {
       icon: "🧠",
       title: "Machine Learning",
-      description: "Predictive algorithms trained on medical datasets.",
+      description:
+        "Predictive algorithms trained on medical datasets.",
     },
     {
       icon: "🎨",
       title: "Tailwind CSS",
-      description: "Rapidly build beautiful responsive interfaces.",
+      description:
+        "Rapidly build beautiful responsive interfaces.",
     },
     {
       icon: "☁️",
       title: "REST API",
-      description: "Seamless communication between frontend and backend.",
+      description:
+        "Seamless communication between frontend and backend.",
     },
   ];
 
   return (
-    <section id="technology" className="bg-slate-900 py-28">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 sm:py-14">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+
         <SectionTitle
           badge="Technology"
-          title="Built with Modern Technologies"
-          description="HealthLens AI combines modern web technologies, machine learning, and scalable backend services to deliver fast and accurate disease predictions"
+          title="Built With Modern Technology"
+          subtitle="A modern technology stack powering HealthLens AI."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {technologies.map((tech) => (
             <TechnologyCard
               key={tech.title}
@@ -64,6 +73,7 @@ function TechnologyStack() {
             />
           ))}
         </div>
+
       </div>
     </section>
   );

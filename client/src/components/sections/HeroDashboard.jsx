@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import {
   BrainCircuit,
   Activity,
@@ -10,325 +9,278 @@ function HeroDashboard() {
   const symptoms = ["Fever", "Cough", "Fatigue", "Headache"];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{
-        opacity: 1,
-        y: [0, -8, 0],
-      }}
-      transition={{
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      whileHover={{ scale: 1.02 }}
+    <div
       className="
         relative
-        w-[600px]
-        min-h-[470px]
-        rounded-[34px]
-        border border-white/10
-        bg-slate-900/70
-        backdrop-blur-3xl
-        shadow-[0_0_90px_rgba(34,211,238,.18)]
+        w-full
+        max-w-[500px]
         overflow-hidden
-        p-8
+        rounded-[26px]
+        border
+        border-white/10
+        bg-slate-900/70
+        p-5
         text-white
+        shadow-[0_0_70px_rgba(34,211,238,.14)]
+        backdrop-blur-3xl
+        sm:p-6
       "
     >
       {/* Background Glow */}
 
-      <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-cyan-500/10 blur-[140px]" />
+      <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-[110px]" />
 
       {/* Header */}
 
       <div className="relative flex items-center justify-between">
-
         <div>
-
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-xl font-bold tracking-tight">
             AI Diagnosis
           </h2>
 
-          <p className="text-slate-400 mt-1">
+          <p className="mt-0.5 text-xs text-slate-400">
             Live Disease Analysis
           </p>
-
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
+          <div className="h-2 w-2 rounded-full bg-green-400" />
 
-          <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-
-          <span className="text-green-400 font-medium">
+          <span className="text-xs font-medium text-green-400">
             Online
           </span>
-
         </div>
-
       </div>
 
       {/* Prediction */}
 
-      <div className="grid grid-cols-[170px_1fr] gap-10 mt-10 items-center">
+      <div className="relative mt-7 grid grid-cols-[112px_1fr] items-center gap-5">
 
         {/* Confidence Ring */}
 
         <div className="flex justify-center">
-
-          <div className="relative w-[150px] h-[150px]">
+          <div className="relative h-[112px] w-[112px]">
 
             <svg
               className="absolute inset-0"
-              width="150"
-              height="150"
-              viewBox="0 0 150 150"
+              width="112"
+              height="112"
+              viewBox="0 0 112 112"
             >
-
               <circle
-                cx="75"
-                cy="75"
-                r="58"
+                cx="56"
+                cy="56"
+                r="43"
                 stroke="#1e293b"
-                strokeWidth="12"
+                strokeWidth="9"
                 fill="none"
               />
 
               <circle
-                cx="75"
-                cy="75"
-                r="58"
+                cx="56"
+                cy="56"
+                r="43"
                 stroke="#22d3ee"
-                strokeWidth="12"
+                strokeWidth="9"
                 fill="none"
                 strokeLinecap="round"
-                strokeDasharray="364"
-                strokeDashoffset="14"
-                transform="rotate(-90 75 75)"
+                strokeDasharray="270"
+                strokeDashoffset="10"
+                transform="rotate(-90 56 56)"
               />
-
             </svg>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-
-              <h2 className="text-4xl font-black text-cyan-400 leading-none">
+              <h2 className="text-[26px] font-black leading-none text-cyan-400">
                 96%
               </h2>
 
-              <span className="mt-2 text-sm text-slate-400">
+              <span className="mt-1 text-[10px] text-slate-400">
                 Confidence
               </span>
-
             </div>
 
           </div>
-
         </div>
 
         {/* Disease */}
 
-        <div>
-
-          <p className="text-sm text-slate-400">
+        <div className="min-w-0">
+          <p className="text-xs text-slate-400">
             Predicted Disease
           </p>
 
-          <h2 className="mt-2 text-5xl font-black text-cyan-400 leading-none">
+          <h2 className="mt-1 text-[34px] font-black leading-none tracking-[-0.035em] text-cyan-400">
             Influenza
           </h2>
 
-          <p className="mt-5 leading-8 text-slate-400">
+          <p className="mt-2 text-[11px] leading-5 text-slate-400">
             AI predicts Influenza with high confidence after
             analysing the selected symptoms using our trained
             Random Forest model.
           </p>
 
-          {/* Progress */}
+          {/* Prediction Score */}
 
-          <div className="mt-8">
-
-            <div className="flex justify-between mb-2">
-
-              <span className="text-sm text-slate-400">
+          <div className="mt-4">
+            <div className="mb-1.5 flex justify-between">
+              <span className="text-[10px] text-slate-400">
                 Prediction Score
               </span>
 
-              <span className="font-semibold text-cyan-400">
+              <span className="text-[10px] font-semibold text-cyan-400">
                 96%
               </span>
-
             </div>
 
-            <div className="h-2.5 rounded-full bg-slate-800 overflow-hidden">
-
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "96%" }}
-                transition={{ duration: 2 }}
+            <div className="h-1.5 overflow-hidden rounded-full bg-slate-800">
+              <div
                 className="
                   h-full
+                  w-[96%]
                   rounded-full
                   bg-gradient-to-r
                   from-cyan-400
                   via-sky-400
                   to-blue-500
-                  shadow-[0_0_18px_rgba(34,211,238,.55)]
+                  shadow-[0_0_14px_rgba(34,211,238,.5)]
                 "
               />
-
             </div>
-
           </div>
-
         </div>
-
       </div>
 
       {/* Symptoms */}
 
-      <div className="mt-10">
-
-        <p className="text-sm text-slate-400 mb-4">
+      <div className="relative mt-6">
+        <p className="mb-2.5 text-xs text-slate-400">
           Symptoms Detected
         </p>
 
-        <div className="flex flex-wrap gap-4">
-
+        <div className="flex flex-wrap gap-1.5">
           {symptoms.map((symptom) => (
-
             <div
               key={symptom}
               className="
                 flex
                 items-center
-                gap-2
+                gap-1.5
                 rounded-full
-                bg-slate-800/80
                 border
                 border-cyan-400/10
-                px-5
-                py-2.5
-                transition-all
-                duration-300
-                hover:bg-cyan-500/10
+                bg-slate-800/80
+                px-3
+                py-1.5
+                transition-colors
+                duration-200
                 hover:border-cyan-400/40
+                hover:bg-cyan-500/10
               "
             >
-
               <CheckCircle2
-                size={16}
+                size={13}
                 className="text-cyan-400"
               />
 
-              <span className="text-sm">
+              <span className="text-[10px]">
                 {symptom}
               </span>
-
             </div>
-
           ))}
-
         </div>
-
       </div>
 
       {/* Bottom Cards */}
 
-      <div className="grid grid-cols-3 gap-5 mt-10">
+      <div className="relative mt-6 grid grid-cols-3 gap-2.5">
+
+        {/* AI Model */}
 
         <div
           className="
-            rounded-2xl
-            bg-slate-800/80
+            rounded-xl
             border
             border-cyan-400/10
-            p-5
-            transition-all
-            duration-300
-            hover:-translate-y-1
+            bg-slate-800/80
+            p-3
+            transition-colors
+            duration-200
             hover:border-cyan-400/30
-            hover:shadow-[0_0_25px_rgba(34,211,238,.18)]
           "
         >
-
           <BrainCircuit
-            size={24}
+            size={19}
             className="text-cyan-400"
           />
 
-          <p className="text-xs text-slate-400 mt-4">
+          <p className="mt-2.5 text-[9px] text-slate-400">
             AI Model
           </p>
 
-          <h3 className="font-semibold mt-2">
+          <h3 className="mt-1 text-xs font-semibold">
             Random Forest
           </h3>
-
         </div>
+
+        {/* Accuracy */}
 
         <div
           className="
-            rounded-2xl
-            bg-slate-800/80
+            rounded-xl
             border
             border-cyan-400/10
-            p-5
-            transition-all
-            duration-300
-            hover:-translate-y-1
+            bg-slate-800/80
+            p-3
+            transition-colors
+            duration-200
             hover:border-cyan-400/30
-            hover:shadow-[0_0_25px_rgba(34,211,238,.18)]
           "
         >
-
           <Activity
-            size={24}
+            size={19}
             className="text-emerald-400"
           />
 
-          <p className="text-xs text-slate-400 mt-4">
+          <p className="mt-2.5 text-[9px] text-slate-400">
             Accuracy
           </p>
 
-          <h3 className="font-semibold mt-2">
+          <h3 className="mt-1 text-xs font-semibold">
             95%
           </h3>
-
         </div>
+
+        {/* Security */}
 
         <div
           className="
-            rounded-2xl
-            bg-slate-800/80
+            rounded-xl
             border
             border-cyan-400/10
-            p-5
-            transition-all
-            duration-300
-            hover:-translate-y-1
+            bg-slate-800/80
+            p-3
+            transition-colors
+            duration-200
             hover:border-cyan-400/30
-            hover:shadow-[0_0_25px_rgba(34,211,238,.18)]
           "
         >
-
           <ShieldCheck
-            size={24}
+            size={19}
             className="text-violet-400"
           />
 
-          <p className="text-xs text-slate-400 mt-4">
+          <p className="mt-2.5 text-[9px] text-slate-400">
             Security
           </p>
 
-          <h3 className="font-semibold mt-2">
+          <h3 className="mt-1 text-xs font-semibold">
             Protected
           </h3>
-
         </div>
 
       </div>
-
-    </motion.div>
+    </div>
   );
 }
 

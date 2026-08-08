@@ -1,19 +1,21 @@
-function Badge({ children }) {
+function Badge({ children, color = "blue" }) {
+  const colors = {
+    blue: "bg-blue-100 text-blue-700",
+    green: "bg-green-100 text-green-700",
+    red: "bg-red-100 text-red-700",
+    yellow: "bg-yellow-100 text-yellow-700",
+  };
+
   return (
     <span
-      className="
-        inline-flex
-        items-center
+      className={`
+        px-3
+        py-1
         rounded-full
-        border
-        border-cyan-500/40
-        bg-cyan-500/10
-        px-4
-        py-2
         text-sm
         font-medium
-        text-cyan-300
-      "
+        ${colors[color]}
+      `}
     >
       {children}
     </span>

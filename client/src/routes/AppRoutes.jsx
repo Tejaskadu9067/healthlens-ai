@@ -6,33 +6,51 @@ import Home from "../pages/Home";
 import Prediction from "../pages/Prediction";
 import Dashboard from "../pages/Dashboard";
 import History from "../pages/History";
+
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import VerifyOTP from "../pages/VerifyOTP";
+
 import NotFound from "../pages/NotFound";
 
 function AppRoutes() {
   return (
-    <AppLayout>
+    <Routes>
 
-      <Routes>
+      {/* Authentication */}
 
-        <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
 
-        <Route path="/prediction" element={<Prediction />} />
+      <Route path="/register" element={<Register />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/verify-otp" element={<VerifyOTP />} />
 
-        <Route path="/history" element={<History />} />
+      {/* Main App */}
 
-        <Route path="/login" element={<Login />} />
+      <Route
+        path="*"
+        element={
+          <AppLayout>
 
-        <Route path="/register" element={<Register />} />
+            <Routes>
 
-        <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Home />} />
 
-      </Routes>
+              <Route path="/prediction" element={<Prediction />} />
 
-    </AppLayout>
+              <Route path="/dashboard" element={<Dashboard />} />
+
+              <Route path="/history" element={<History />} />
+
+              <Route path="*" element={<NotFound />} />
+
+            </Routes>
+
+          </AppLayout>
+        }
+      />
+
+    </Routes>
   );
 }
 

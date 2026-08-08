@@ -15,8 +15,10 @@ function PredictionDemo() {
   ];
 
   return (
-    <section id="demo" className="bg-slate-950 py-28">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 sm:py-14">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+
+        {/* Section Title */}
 
         <SectionTitle
           badge="Live Demo"
@@ -24,20 +26,27 @@ function PredictionDemo() {
           description="Experience how our AI predicts diseases from symptoms in just a few seconds."
         />
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center mt-20">
+        <div className="mt-10 grid items-center gap-8 lg:grid-cols-2">
 
-          {/* LEFT SIDE */}
+          {/* =========================
+              LEFT SIDE
+          ========================== */}
 
           <div>
-            <h3 className="text-3xl font-bold text-white mb-6">
+
+            <h3 className="mb-2 text-xl font-semibold tracking-tight text-white">
               Selected Symptoms
             </h3>
-            <p className="text-slate-400 mt-3 mb-8 max-w-md leading-7">
-            Select common symptoms to see how HealthLens AI analyzes clinical data and
-            predicts the most probable disease within seconds.
+
+            <p className="mb-5 max-w-md text-[12px] leading-5 text-slate-400">
+              Select common symptoms to see how HealthLens AI analyzes
+              clinical data and predicts the most probable disease
+              within seconds.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            {/* Symptoms */}
+
+            <div className="flex flex-wrap gap-2">
 
               {symptoms.map((symptom) => (
                 <SymptomTag key={symptom}>
@@ -47,73 +56,112 @@ function PredictionDemo() {
 
             </div>
 
-            <div className="mt-10">
-              <Button>
+            {/* Button */}
+
+            <div className="mt-6">
+              <Button className="rounded-xl px-5 py-2.5 text-sm">
                 Predict Disease
               </Button>
             </div>
+
           </div>
 
-          {/* RIGHT SIDE */}
 
-          <Card className="p-8">
+          {/* =========================
+              RIGHT SIDE
+          ========================== */}
 
-            <div className="flex justify-between items-center">
+          <Card className="p-5 sm:p-6">
+
+            {/* Header */}
+
+            <div className="flex items-start justify-between gap-4">
 
               <div>
-                <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-                <span className="text-cyan-300 text-sm">
+
+                {/* Analysis Status */}
+
+                <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5">
+
+                  <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
+
+                  <span className="text-[10px] font-medium text-cyan-300">
                     AI Analysis Complete
-                </span>
+                  </span>
+
                 </div>
-                <p className="text-slate-400">
+
+                <p className="text-[11px] text-slate-400">
                   Prediction Result
                 </p>
 
-                <h3 className="text-4xl font-bold text-cyan-400 mt-2">
+                <h3 className="mt-1 text-3xl font-bold tracking-tight text-cyan-400">
                   Influenza
                 </h3>
+
               </div>
 
-              <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse"></div>
+              <div className="h-2 w-2 shrink-0 rounded-full bg-green-400" />
 
             </div>
 
-            <div className="mt-10">
 
-              <div className="flex justify-between mb-2">
-                <span className="text-slate-300">
+            {/* Confidence */}
+
+            <div className="mt-6">
+
+              <div className="flex items-center justify-between">
+
+                <span className="text-xs text-slate-300">
                   Confidence
                 </span>
 
-            <div className="flex justify-between text-sm text-slate-400 mt-3">
-            <span>Processing Time </span>
-            <span>0.82 sec</span>
-            </div>
+                <span className="rounded-full bg-green-500/15 px-2.5 py-1 text-[10px] font-semibold text-green-400">
+                  High Confidence
+                </span>
 
-                            <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm font-semibold">
-            High Confidence
-            </span>     
               </div>
 
               <ProgressBar value={96} />
 
+              {/* Processing Time */}
+
+              <div className="mt-2.5 flex justify-between text-[10px] text-slate-400">
+
+                <span>
+                  Processing Time
+                </span>
+
+                <span>
+                  0.82 sec
+                </span>
+
+              </div>
+
             </div>
 
-            <div className="mt-10 border-t border-slate-700 pt-8">
 
-              <h4 className="text-white font-semibold mb-4">
+            {/* Recommendation */}
+
+            <div className="mt-6 border-t border-slate-700/70 pt-5">
+
+              <h4 className="mb-3 text-sm font-semibold text-white">
                 Recommendation
               </h4>
 
-              <ul className="space-y-3 text-slate-300">
+              <ul className="space-y-2 text-[11px] leading-5 text-slate-300">
 
-                <li>✔ Rest and stay hydrated</li>
+                <li>
+                  ✔ Rest and stay hydrated
+                </li>
 
-                <li>✔ Consult a physician if symptoms worsen</li>
+                <li>
+                  ✔ Consult a physician if symptoms worsen
+                </li>
 
-                <li>✔ Take prescribed medication</li>
+                <li>
+                  ✔ Take prescribed medication
+                </li>
 
               </ul>
 
@@ -122,6 +170,7 @@ function PredictionDemo() {
           </Card>
 
         </div>
+
       </div>
     </section>
   );

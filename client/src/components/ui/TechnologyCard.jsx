@@ -1,21 +1,63 @@
 function TechnologyCard({ icon, title, description }) {
   return (
-    <div className="bg-slate-900
-border border-slate-800
-rounded-2xl
-p-6
-transition-all
-duration-300
-hover:-translate-y-2
-hover:border-cyan-400
-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
-      <div className="text-5xl mb-5">{icon}</div>
+    <div
+      className="
+        group
+        rounded-[20px]
+        border
+        border-white/[0.08]
+        bg-slate-900/60
+        p-5
+        shadow-[0_10px_35px_rgba(0,0,0,0.12)]
+        backdrop-blur-xl
+        transition-all
+        duration-200
+        hover:-translate-y-1
+        hover:border-cyan-400/25
+        hover:bg-slate-900/80
+      "
+    >
+      {/* Icon */}
 
-      <h3 className="text-white text-xl font-semibold mb-2">
+      <div
+        className="
+          mb-4
+          flex
+          h-10
+          w-10
+          items-center
+          justify-center
+          rounded-xl
+          bg-white/[0.06]
+          text-xl
+          transition-all
+          duration-200
+          group-hover:bg-cyan-400/10
+        "
+      >
+        {icon}
+      </div>
+
+      {/* Title */}
+
+      <h3
+        className="
+          mb-2
+          text-[16px]
+          font-semibold
+          tracking-tight
+          text-white
+          transition-colors
+          duration-200
+          group-hover:text-cyan-400
+        "
+      >
         {title}
       </h3>
 
-      <p className="text-slate-400 text-sm leading-6">
+      {/* Description */}
+
+      <p className="text-[12px] leading-5 text-slate-400">
         {description}
       </p>
     </div>

@@ -1,26 +1,45 @@
-import axios from "axios";
+import api from "./api";
 
-console.log("VITE_API_URL =", import.meta.env.VITE_API_URL);
-
-const API = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api`,
-});
-
-console.log("Axios Base URL =", API.defaults.baseURL);
+// ======================================
+// Predict Disease
+// ======================================
 
 export async function predictDisease(symptoms) {
-  const response = await API.post("/predictions", {
+  const { data } = await api.post("/predictions", {
     symptoms,
   });
 
-  return response.data;
+  return data;
 }
+
+// ======================================
+// Get Symptoms
+// ======================================
 
 export async function getSymptoms() {
-  const response = await API.get("/predictions/symptoms");
+  const { data } = await api.get("/predictions/symptoms");
 
-  // Return ONLY the array
-  return response.data.symptoms;
+  return data.symptoms;
 }
 
-export default API;
+// ======================================
+// Get Prediction History
+// ======================================
+
+export async function getPredictionHistory() {
+  const { data } = await api.get("/predictions/history");
+
+  return data;
+}
+
+// ======================================
+// Delete Prediction
+// ======================================
+
+export async function deletePrediction(id) {
+  const { data } = await api.delete(
+    `/predictions/${id}`
+  );
+
+  return data;
+}

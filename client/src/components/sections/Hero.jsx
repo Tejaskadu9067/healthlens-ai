@@ -6,54 +6,44 @@ import HeroDashboard from "./HeroDashboard";
 
 function Hero() {
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.15fr] gap-28 items-center px-8">
+    <section className="relative overflow-hidden">
+      <div className="mx-auto grid max-w-6xl items-center gap-6 px-5 py-7 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:gap-8 lg:px-8 lg:py-9">
 
-        {/* Left */}
+        {/* LEFT */}
 
-        <div className="max-w-xl text-white">
+        <div className="max-w-[500px] text-white">
 
           <Badge>
             🚀 AI Powered Healthcare
           </Badge>
 
-          <h1 className="mt-8 text-7xl font-black leading-[1.05]">
+          <h1 className="mt-4 text-[40px] font-black leading-[0.98] tracking-[-0.045em] sm:text-[46px] lg:text-[52px]">
 
             AI-Powered
 
             <span className="block bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 bg-clip-text text-transparent">
-
               Disease Prediction
-
             </span>
 
           </h1>
 
-          <p className="mt-8 text-xl leading-10 text-slate-400">
-
+          <p className="mt-4 max-w-[450px] text-[13px] leading-6 text-slate-400">
             Detect diseases intelligently using Machine Learning,
             Explainable AI and modern clinical decision support.
-
             Fast, secure and built for the future of healthcare.
-
           </p>
 
-          <div className="flex gap-5 mt-12">
+          <div className="mt-5 flex gap-2.5">
 
             <Link to="/prediction">
-
-              <Button className="px-8 py-4 rounded-2xl">
+              <Button className="rounded-lg px-5 py-2.5 text-xs">
                 Start Diagnosis
               </Button>
-
             </Link>
 
             <Button
               variant="secondary"
-              className="px-8 py-4 rounded-2xl"
+              className="rounded-lg px-5 py-2.5 text-xs"
             >
               Watch Demo
             </Button>
@@ -62,34 +52,39 @@ function Hero() {
 
         </div>
 
-        {/* Right */}
 
-        <div className="relative flex justify-center lg:justify-end pt-10">
+        {/* RIGHT */}
 
-          {/* Glow */}
+        <div className="relative flex items-center justify-center lg:justify-end">
+
+          {/* Smaller glow */}
 
           <div
             className="
+              pointer-events-none
               absolute
-              right-0
-              w-[700px]
-              h-[700px]
+              right-5
+              top-1/2
+              h-[300px]
+              w-[300px]
+              -translate-y-1/2
               rounded-full
-              bg-cyan-500/15
-              blur-[180px]
+              bg-cyan-500/10
+              blur-[90px]
             "
           />
 
-          <div className="relative z-10">
+          {/* IMPORTANT:
+              Constrain the actual dashboard.
+          */}
 
+          <div className="relative z-10 w-full max-w-[480px] scale-[0.92] origin-right sm:scale-95 lg:scale-100">
             <HeroDashboard />
-
           </div>
 
         </div>
 
       </div>
-
     </section>
   );
 }

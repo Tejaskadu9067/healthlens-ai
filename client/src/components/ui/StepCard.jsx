@@ -1,19 +1,63 @@
 function StepCard({ number, title, description }) {
   return (
-    <div className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-3 hover:border-cyan-400 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]">
-      
+    <div
+      className="
+        group
+        rounded-[20px]
+        border
+        border-white/[0.08]
+        bg-slate-900/60
+        p-5
+        shadow-[0_10px_35px_rgba(0,0,0,0.12)]
+        backdrop-blur-xl
+        transition-all
+        duration-200
+        hover:-translate-y-1
+        hover:border-cyan-400/25
+        hover:bg-slate-900/80
+      "
+    >
       {/* Step Number */}
-      <div className="w-14 h-14 rounded-full bg-cyan-500 text-white flex items-center justify-center text-xl font-bold mb-6">
+
+      <div
+        className="
+          mb-4
+          flex
+          h-9
+          w-9
+          items-center
+          justify-center
+          rounded-full
+          bg-cyan-500
+          text-xs
+          font-bold
+          text-white
+          shadow-[0_0_18px_rgba(34,211,238,0.18)]
+        "
+      >
         {number}
       </div>
 
       {/* Title */}
-      <h3 className="text-2xl font-bold text-white mb-4">
+
+      <h3
+        className="
+          mb-2
+          text-[16px]
+          font-semibold
+          tracking-tight
+          text-white
+          transition-colors
+          duration-200
+          group-hover:text-cyan-400
+        "
+      >
         {title}
       </h3>
 
       {/* Description */}
-      <p className="text-slate-400 leading-7">
+
+      <p className="text-[12px] leading-5 text-slate-400">
         {description}
       </p>
     </div>

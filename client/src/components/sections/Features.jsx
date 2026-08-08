@@ -3,28 +3,31 @@ import { FEATURES } from "../../constants/features";
 
 function Features() {
   return (
-    <section id="features" className="bg-slate-950 py-28">
+    <section className="py-12 sm:py-14">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
 
-      <div className="max-w-7xl mx-auto px-6">
+        {/* Section Header */}
 
-        <div className="text-center mb-20">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
 
-          <p className="text-cyan-400 font-semibold uppercase tracking-widest">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400">
             Features
           </p>
 
-          <h2 className="text-5xl font-bold text-white mt-4">
+          <h2 className="mt-2.5 text-3xl font-bold tracking-[-0.035em] text-white sm:text-4xl">
             Why Choose HealthLens AI
           </h2>
 
-          <p className="text-slate-400 mt-6 max-w-2xl mx-auto text-lg">
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-400">
             Combining Artificial Intelligence, Machine Learning and
             Explainable AI to deliver trustworthy healthcare insights.
           </p>
 
         </div>
 
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+        {/* Feature Cards */}
+
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 
           {FEATURES.map((feature) => (
             <FeatureCard
@@ -38,7 +41,6 @@ function Features() {
         </div>
 
       </div>
-
     </section>
   );
 }

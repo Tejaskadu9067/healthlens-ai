@@ -5,12 +5,33 @@ import {
   fetchSymptoms,
 } from "../controllers/predictionController.js";
 
+import protect from "../middleware/authMiddleware.js";
+
+import {
+  fetchPredictionHistory,
+  deletePrediction,
+} from "../controllers/predictionHistoryController.js";
+
 const router = express.Router();
 
-// Get all available symptoms
+// ===============================
+// Symptoms
+// ===============================
 router.get("/symptoms", fetchSymptoms);
 
-// Predict disease
-router.post("/", getPrediction);
+// ===============================
+// Disease Prediction
+// ===============================
+router.post("/", protect, getPrediction);
+
+// ===============================
+// Prediction History
+// ===============================
+router.get("/history", protect, fetchPredictionHistory);
+
+// ===============================
+// Delete Prediction
+// ===============================
+router.delete("/:id", protect, deletePrediction);
 
 export default router;

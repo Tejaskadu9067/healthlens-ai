@@ -30,8 +30,8 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="bg-slate-900 py-28">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12 sm:py-14">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
 
         <SectionTitle
           badge="How It Works"
@@ -39,7 +39,7 @@ function HowItWorks() {
           subtitle="Get accurate disease predictions in just four easy steps."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step) => (
             <StepCard
               key={step.number}

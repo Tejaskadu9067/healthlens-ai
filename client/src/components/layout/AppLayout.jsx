@@ -1,27 +1,28 @@
 import Navbar from "./Navbar";
-import AnimatedBackground from "../background/AnimatedBackground";
+import Footer from "./Footer";
 
 function AppLayout({ children }) {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-white">
-      {/* Animated Background */}
-      <AnimatedBackground />
+    <div className="relative min-h-screen bg-[#020617] text-white overflow-x-hidden">
 
-      {/* Fixed Navbar */}
-      <Navbar />
+      {/* Background Orbs */}
 
-      {/* Main Content */}
-      <main
-        className="
-          relative
-          z-10
-          min-h-screen
-          pt-36
-          pb-16
-        "
-      >
-        {children}
-      </main>
+      <div className="bg-orb bg-orb-one" />
+      <div className="bg-orb bg-orb-two" />
+      <div className="bg-orb bg-orb-three" />
+
+      <div className="relative z-10 flex min-h-screen flex-col">
+
+        <Navbar />
+
+        <main className="flex-1">
+          {children}
+        </main>
+
+        <Footer />
+
+      </div>
+
     </div>
   );
 }
