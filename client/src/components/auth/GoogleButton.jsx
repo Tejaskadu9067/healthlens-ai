@@ -37,17 +37,37 @@ function GoogleButton({ variant = "auth" }) {
       });
 
       console.log("✅ Firebase Login Successful");
+
     } catch (error) {
       console.error("Google Login Error:");
       console.error(error);
     }
   }
 
-  const authStyle =
-    "w-full h-14 rounded-2xl bg-white hover:bg-slate-100 text-slate-800";
+  const authStyle = `
+    h-14
+    w-full
+    rounded-2xl
+    border
+    border-white/[0.10]
+    bg-[#111111]
+    text-white
+    hover:bg-[#181818]
+    hover:border-white/[0.18]
+  `;
 
-  const navbarStyle =
-    "px-5 h-11 rounded-xl bg-white hover:bg-slate-100 text-slate-800";
+  const navbarStyle = `
+    h-11
+    rounded-xl
+    border
+    border-white/[0.10]
+    bg-white
+    px-5
+    text-sm
+    text-black
+    hover:bg-neutral-200
+    hover:border-neutral-200
+  `;
 
   return (
     <button
@@ -58,6 +78,7 @@ function GoogleButton({ variant = "auth" }) {
             ? authStyle
             : navbarStyle
         }
+
         flex
         items-center
         justify-center
@@ -65,16 +86,17 @@ function GoogleButton({ variant = "auth" }) {
         font-semibold
         transition-all
         duration-300
-        hover:scale-[1.02]
-        active:scale-95
-        shadow-lg
+        hover:-translate-y-0.5
+        active:translate-y-0
       `}
     >
-      <FcGoogle className="text-2xl" />
+
+      <FcGoogle className="text-xl" />
 
       {variant === "auth"
         ? "Continue with Google"
         : "Sign in"}
+
     </button>
   );
 }

@@ -12,11 +12,12 @@ function PhoneInput({
           absolute
           left-5
           top-1/2
-          -translate-y-1/2
-          text-cyan-400
-          w-5
           h-5
+          w-5
+          -translate-y-1/2
+          text-neutral-600
         "
+        strokeWidth={1.5}
       />
 
       <input
@@ -25,22 +26,23 @@ function PhoneInput({
         value={value}
         onChange={onChange}
         className="
-          w-full
           h-14
+          w-full
           rounded-2xl
-          bg-slate-900/60
           border
-          border-white/10
+          border-white/[0.10]
+          bg-[#111111]
           pl-14
           pr-5
           text-white
-          placeholder:text-slate-500
           outline-none
-          transition
+          transition-all
           duration-300
-          focus:border-cyan-400
-          focus:ring-4
-          focus:ring-cyan-500/10
+          placeholder:text-neutral-700
+          hover:border-white/[0.16]
+          focus:border-white/[0.25]
+          focus:bg-[#151515]
+          focus:ring-0
         "
       />
 

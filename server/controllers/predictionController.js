@@ -67,15 +67,13 @@ export async function getPrediction(req, res) {
     });
 
   } catch (error) {
-
     console.error("Prediction Controller Error:");
     console.error(error);
 
-    return res.status(500).json({
+    return res.status(error.statusCode || 500).json({
       success: false,
       message: error.message,
     });
-
   }
 }
 
@@ -85,7 +83,6 @@ export async function getPrediction(req, res) {
 
 export async function fetchSymptoms(req, res) {
   try {
-
     const symptoms = await getSymptoms();
 
     return res.status(200).json({
@@ -94,14 +91,12 @@ export async function fetchSymptoms(req, res) {
     });
 
   } catch (error) {
-
     console.error("Symptoms Error:");
     console.error(error);
 
-    return res.status(500).json({
+    return res.status(error.statusCode || 500).json({
       success: false,
       message: error.message,
     });
-
   }
 }

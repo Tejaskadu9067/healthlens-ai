@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ArrowDown, Sparkles } from "lucide-react";
 
 import {
   predictDisease,
@@ -100,67 +101,319 @@ function Prediction() {
   }
 
   return (
-    <div className="relative min-h-screen text-white pt-16 pb-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <main className="min-h-screen bg-black text-white">
 
-        {/* Heading */}
+      {/* ==================================================
+          INTRO
+      ================================================== */}
 
-        <div className="text-center mb-12">
+      <section className="px-6 pb-20 pt-28 sm:px-10 lg:px-16">
 
-          <h1 className="text-4xl lg:text-5xl font-extrabold">
-            AI Disease Prediction
-          </h1>
+        <div className="mx-auto max-w-[1400px]">
 
-          <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto leading-8">
-            Select your symptoms and allow our Machine Learning model
-            to predict the most probable disease with confidence,
-            recommendations and precautions.
-          </p>
+          <div className="max-w-4xl">
+
+            <p
+              className="
+                mb-7
+                text-[11px]
+                font-medium
+                uppercase
+                tracking-[0.3em]
+                text-neutral-500
+              "
+            >
+              AI HEALTH ASSESSMENT
+            </p>
+
+            <h1
+              className="
+                text-5xl
+                font-semibold
+                leading-[0.98]
+                tracking-[-0.055em]
+                text-white
+                sm:text-6xl
+                lg:text-[82px]
+              "
+            >
+              Tell us what
+              <span className="block text-neutral-500">
+                you're feeling.
+              </span>
+            </h1>
+
+            <p
+              className="
+                mt-9
+                max-w-2xl
+                text-base
+                leading-7
+                text-neutral-500
+                sm:text-lg
+              "
+            >
+              Select the symptoms you're experiencing and let
+              HealthLens analyse them using its trained machine
+              learning model.
+            </p>
+
+          </div>
 
         </div>
 
-        {/* Main Grid */}
+      </section>
 
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12">
 
-          {/* Left Panel */}
+      {/* ==================================================
+          ASSESSMENT AREA
+      ================================================== */}
 
-          <div className="space-y-8">
+      <section className="px-6 pb-32 sm:px-10 lg:px-16">
 
-            <div className="glass-card glass-card-hover p-8">
+        <div className="mx-auto max-w-[1400px]">
 
-              <SymptomSearch
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                filteredSymptoms={filteredSymptoms}
-                selectedSymptoms={selectedSymptoms}
-                addSymptom={addSymptom}
-              />
+          <div className="grid gap-8 lg:grid-cols-[1fr_0.82fr]">
 
-            </div>
+            {/* ==================================================
+                LEFT — SYMPTOM SELECTION
+            ================================================== */}
 
-            <div className="glass-card glass-card-hover p-8">
+            <div
+              className="
+                overflow-hidden
+                rounded-[32px]
+                border
+                border-white/[0.10]
+                bg-[#080808]
+              "
+            >
 
-              <div className="flex justify-between items-center mb-6">
+              {/* Header */}
 
-                <h2 className="text-2xl font-bold">
-                  Selected Symptoms
-                </h2>
+              <div
+                className="
+                  border-b
+                  border-white/[0.08]
+                  px-7
+                  py-6
+                  sm:px-9
+                "
+              >
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-between">
 
-                  <span className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-full text-sm font-semibold">
-                    {selectedSymptoms.length} Selected
-                  </span>
+                  <div>
 
-                  {selectedSymptoms.length > 0 && (
-
-                    <button
-                      onClick={clearSymptoms}
-                      className="px-4 py-2 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300"
+                    <p
+                      className="
+                        text-[10px]
+                        font-medium
+                        uppercase
+                        tracking-[0.25em]
+                        text-neutral-600
+                      "
                     >
-                      Clear All
-                    </button>
+                      STEP 01
+                    </p>
+
+                    <h2
+                      className="
+                        mt-2
+                        text-xl
+                        font-semibold
+                        tracking-[-0.025em]
+                        text-white
+                      "
+                    >
+                      Select your symptoms
+                    </h2>
+
+                  </div>
+
+                  <div
+                    className="
+                      flex
+                      h-10
+                      w-10
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-white/[0.10]
+                      bg-white/[0.025]
+                    "
+                  >
+                    <Sparkles
+                      className="h-4 w-4 text-neutral-400"
+                      strokeWidth={1.4}
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* Search */}
+
+              <div className="p-7 sm:p-9">
+
+                <SymptomSearch
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  filteredSymptoms={filteredSymptoms}
+                  selectedSymptoms={selectedSymptoms}
+                  addSymptom={addSymptom}
+                />
+
+
+                {/* Selected Symptoms */}
+
+                <div className="mt-10">
+
+                  <div className="mb-5 flex items-center justify-between">
+
+                    <div>
+
+                      <p
+                        className="
+                          text-[10px]
+                          font-medium
+                          uppercase
+                          tracking-[0.25em]
+                          text-neutral-600
+                        "
+                      >
+                        SELECTED
+                      </p>
+
+                      <h3
+                        className="
+                          mt-1
+                          text-lg
+                          font-semibold
+                          tracking-[-0.025em]
+                          text-white
+                        "
+                      >
+                        Your symptoms
+                      </h3>
+
+                    </div>
+
+
+                    <div className="flex items-center gap-3">
+
+                      <span
+                        className="
+                          text-xs
+                          text-neutral-500
+                        "
+                      >
+                        {selectedSymptoms.length} selected
+                      </span>
+
+                      {selectedSymptoms.length > 0 && (
+
+                        <button
+                          onClick={clearSymptoms}
+                          className="
+                            text-xs
+                            text-neutral-600
+                            transition-colors
+                            duration-300
+                            hover:text-white
+                          "
+                        >
+                          Clear
+                        </button>
+
+                      )}
+
+                    </div>
+
+                  </div>
+
+
+                  {selectedSymptoms.length === 0 ? (
+
+                    <div
+                      className="
+                        rounded-2xl
+                        border
+                        border-dashed
+                        border-white/[0.10]
+                        px-6
+                        py-10
+                        text-center
+                      "
+                    >
+
+                      <p className="text-sm text-neutral-500">
+                        No symptoms selected yet.
+                      </p>
+
+                      <p className="mt-2 text-xs text-neutral-700">
+                        Search above to add symptoms.
+                      </p>
+
+                    </div>
+
+                  ) : (
+
+                    <SelectedSymptoms
+                      symptoms={selectedSymptoms}
+                      removeSymptom={removeSymptom}
+                    />
+
+                  )}
+
+                </div>
+
+
+                {/* Prediction */}
+
+                <div className="mt-10">
+
+                  <PredictButton
+                    onClick={handlePrediction}
+                    disabled={selectedSymptoms.length < 3}
+                    loading={loading}
+                  />
+
+                  {selectedSymptoms.length < 3 && (
+
+                    <p
+                      className="
+                        mt-4
+                        text-center
+                        text-xs
+                        text-neutral-600
+                      "
+                    >
+                      Select at least 3 symptoms to continue.
+                    </p>
+
+                  )}
+
+                  {error && (
+
+                    <div
+                      className="
+                        mt-5
+                        rounded-2xl
+                        border
+                        border-white/[0.10]
+                        bg-white/[0.025]
+                        p-4
+                        text-sm
+                        leading-6
+                        text-neutral-400
+                      "
+                    >
+                      {error}
+                    </div>
 
                   )}
 
@@ -168,74 +421,59 @@ function Prediction() {
 
               </div>
 
-              {selectedSymptoms.length === 0 ? (
+            </div>
 
-                <div className="border border-dashed border-slate-700 rounded-2xl p-10 text-center">
 
-                  <p className="text-slate-400">
-                    No symptoms selected yet.
-                  </p>
+            {/* ==================================================
+                RIGHT — RESULT
+            ================================================== */}
 
-                  <p className="text-slate-500 mt-3">
-                    Search symptoms above and add them here.
-                  </p>
+            <div className="lg:sticky lg:top-28 lg:self-start">
 
-                </div>
-
-              ) : (
-
-                <SelectedSymptoms
-                  symptoms={selectedSymptoms}
-                  removeSymptom={removeSymptom}
-                />
-
-              )}
-
-              <div className="mt-10">
-
-                <PredictButton
-                  onClick={handlePrediction}
-                  disabled={selectedSymptoms.length < 3}
-                  loading={loading}
-                />
-
-                {selectedSymptoms.length < 3 && (
-
-                  <p className="text-red-400 text-sm mt-4">
-                    Please select at least 3 symptoms.
-                  </p>
-
-                )}
-
-                {error && (
-
-                  <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-red-300">
-                    {error}
-                  </div>
-
-                )}
-
-              </div>
+              <PredictionDashboard
+                prediction={prediction}
+                loading={loading}
+                selectedCount={selectedSymptoms.length}
+                history={history}
+                onSelectHistory={selectHistory}
+                onClearHistory={clearHistory}
+              />
 
             </div>
 
           </div>
 
-          {/* Right Panel */}
-
-          <PredictionDashboard
-            prediction={prediction}
-            loading={loading}
-            selectedCount={selectedSymptoms.length}
-            history={history}
-            onSelectHistory={selectHistory}
-            onClearHistory={clearHistory}
-          />
-
         </div>
 
+      </section>
+
+
+      {/* ==================================================
+          FOOTER TRANSITION
+      ================================================== */}
+
+      <div className="flex flex-col items-center pb-20">
+
+        <p
+          className="
+            text-[10px]
+            font-medium
+            uppercase
+            tracking-[0.3em]
+            text-neutral-700
+          "
+        >
+          HEALTHLENS
+        </p>
+
+        <ArrowDown
+          className="mt-5 h-4 w-4 text-neutral-800"
+          strokeWidth={1}
+        />
+
       </div>
-    </div>
+
+    </main>
   );
 }
 

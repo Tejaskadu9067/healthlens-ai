@@ -1,31 +1,60 @@
+import { CheckCircle2 } from "lucide-react";
 import DashboardCard from "../common/DashboardCard";
 
 function PredictionStatus({ selectedCount }) {
   return (
-    <DashboardCard>
+    <DashboardCard className="!p-4">
 
-      <h3 className="text-xl font-semibold text-cyan-400 mb-5">
-        📊 Prediction Status
-      </h3>
+      <div className="flex items-center justify-between gap-4">
 
-      <div className="space-y-4">
+        {/* Symptoms */}
 
-        <div className="flex justify-between rounded-2xl bg-slate-800 p-4">
+        <div className="flex items-center gap-3">
 
-          <span>Symptoms Selected</span>
+          <div
+            className="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/[0.08]
+              bg-white/[0.025]
+            "
+          >
+            <span className="text-xs text-neutral-400">
+              {selectedCount}
+            </span>
+          </div>
 
-          <span className="text-cyan-400 font-semibold">
-            {selectedCount}
-          </span>
+          <div>
+
+            <p className="text-xs font-medium text-neutral-300">
+              Symptoms selected
+            </p>
+
+            <p className="mt-0.5 text-[10px] text-neutral-600">
+              Current assessment
+            </p>
+
+          </div>
 
         </div>
 
-        <div className="flex justify-between rounded-2xl bg-slate-800 p-4">
 
-          <span>AI Engine</span>
+        {/* AI Engine */}
 
-          <span className="text-green-400 font-semibold">
-            Ready
+        <div className="flex items-center gap-2">
+
+          <CheckCircle2
+            className="h-4 w-4 text-neutral-400"
+            strokeWidth={1.5}
+          />
+
+          <span className="text-xs text-neutral-500">
+            AI engine ready
           </span>
 
         </div>

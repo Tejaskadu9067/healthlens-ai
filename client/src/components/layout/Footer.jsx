@@ -1,105 +1,279 @@
-import { Brain, Mail, MapPin, Phone } from "lucide-react";
+import { Activity, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Top */}
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-3">
-              <Brain className="text-cyan-400" size={34} />
+    <footer className="relative bg-black text-white">
 
-              <div>
-                <h2 className="text-2xl font-bold text-white">
-                  HealthLens AI
-                </h2>
+      {/* ======================================
+          TOP BORDER
+      ====================================== */}
 
-                <p className="text-slate-400 text-sm">
-                  AI Disease Prediction Platform
-                </p>
-              </div>
+      <div className="mx-auto max-w-[1400px] border-t border-white/[0.10]" />
+
+
+      <div className="mx-auto max-w-[1400px] px-6 py-24 sm:px-10 lg:px-16">
+
+        {/* ======================================
+            BRAND
+        ====================================== */}
+
+        <div className="flex flex-col items-center text-center">
+
+          {/* Logo */}
+
+          <Link
+            to="/"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+            "
+          >
+
+            <div
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                bg-white
+                shadow-[0_0_25px_rgba(255,255,255,0.08)]
+                transition-transform
+                duration-300
+                group-hover:scale-105
+              "
+            >
+              <Activity
+                className="
+                  h-5
+                  w-5
+                  text-black
+                "
+                strokeWidth={2.5}
+              />
             </div>
 
-            <p className="mt-6 text-slate-400 leading-7">
-              HealthLens AI combines Machine Learning, Explainable AI,
-              and modern web technologies to assist users in predicting
-              diseases based on symptoms. Built to support healthcare,
-              not replace medical professionals.
-            </p>
-          </div>
+            <span
+              className="
+                text-xl
+                font-semibold
+                tracking-[-0.04em]
+              "
+            >
+              HealthLens
+            </span>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold text-lg mb-5">
-              Quick Links
-            </h3>
+          </Link>
 
-            <ul className="space-y-4 text-slate-400">
-              <li>
-                <a href="#features" className="hover:text-cyan-400 transition">
-                  Features
-                </a>
-              </li>
 
-              <li>
-                <a href="#how-it-works" className="hover:text-cyan-400 transition">
-                  How It Works
-                </a>
-              </li>
+          {/* Statement */}
 
-              <li>
-                <a href="#technology" className="hover:text-cyan-400 transition">
-                  Technology
-                </a>
-              </li>
+          <h2
+            className="
+              mt-10
+              max-w-3xl
+              text-4xl
+              font-semibold
+              leading-[1]
+              tracking-[-0.05em]
+              sm:text-5xl
+              lg:text-6xl
+            "
+          >
+            Health intelligence.
+            <span className="block text-neutral-500">
+              Simplified.
+            </span>
+          </h2>
 
-              <li>
-                <a href="#about" className="hover:text-cyan-400 transition">
-                  About
-                </a>
-              </li>
-            </ul>
-          </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="text-white font-semibold text-lg mb-5">
-              Contact
-            </h3>
-
-            <div className="space-y-4 text-slate-400">
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-cyan-400" />
-                <span>support@healthlens.ai</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Phone size={18} className="text-cyan-400" />
-                <span>+91 98765 43210</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <MapPin size={18} className="text-cyan-400" />
-                <span>Nagpur, Maharashtra, India</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom */}
-
-        <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-sm text-center md:text-left">
-            © {new Date().getFullYear()} HealthLens AI. All rights reserved.
+          <p
+            className="
+              mt-7
+              max-w-lg
+              text-sm
+              leading-6
+              text-neutral-500
+            "
+          >
+            AI-assisted health analysis designed to help you
+            understand your symptoms with greater clarity.
           </p>
 
-          <p className="text-slate-500 text-sm text-center md:text-right">
-            Built with React • Tailwind CSS • Node.js • Python • AI
-          </p>
         </div>
+
+
+        {/* ======================================
+            NAVIGATION
+        ====================================== */}
+
+        <div
+          className="
+            mt-20
+            flex
+            flex-wrap
+            items-center
+            justify-center
+            gap-x-8
+            gap-y-4
+            border-y
+            border-white/[0.08]
+            py-7
+          "
+        >
+
+          <Link
+            to="/prediction"
+            className="
+              text-sm
+              text-neutral-500
+              transition-colors
+              duration-300
+              hover:text-white
+            "
+          >
+            Prediction
+          </Link>
+
+          <Link
+            to="/history"
+            className="
+              text-sm
+              text-neutral-500
+              transition-colors
+              duration-300
+              hover:text-white
+            "
+          >
+            History
+          </Link>
+
+          <Link
+            to="/dashboard"
+            className="
+              text-sm
+              text-neutral-500
+              transition-colors
+              duration-300
+              hover:text-white
+            "
+          >
+            Dashboard
+          </Link>
+
+          <Link
+            to="/about"
+            className="
+              group
+              flex
+              items-center
+              gap-1
+              text-sm
+              text-neutral-500
+              transition-colors
+              duration-300
+              hover:text-white
+            "
+          >
+            About
+
+            <ArrowUpRight
+              className="
+                h-3.5
+                w-3.5
+                transition-transform
+                duration-300
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+              "
+              strokeWidth={1.5}
+            />
+
+          </Link>
+
+        </div>
+
+
+        {/* ======================================
+            DISCLAIMER
+        ====================================== */}
+
+        <div className="mx-auto mt-12 max-w-3xl text-center">
+
+          <p
+            className="
+              text-[11px]
+              leading-5
+              text-neutral-600
+            "
+          >
+            HealthLens provides AI-assisted health information
+            for informational purposes only. It is not intended
+            to replace professional medical advice, diagnosis,
+            or treatment.
+          </p>
+
+        </div>
+
+
+        {/* ======================================
+            BOTTOM
+        ====================================== */}
+
+        <div
+          className="
+            mt-16
+            flex
+            flex-col
+            items-center
+            justify-between
+            gap-5
+            border-t
+            border-white/[0.08]
+            pt-7
+            text-[11px]
+            text-neutral-600
+            sm:flex-row
+          "
+        >
+
+          <p>
+            © {new Date().getFullYear()} HealthLens.
+            All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-6">
+
+            <button
+              className="
+                transition-colors
+                duration-300
+                hover:text-white
+              "
+            >
+              Privacy
+            </button>
+
+            <button
+              className="
+                transition-colors
+                duration-300
+                hover:text-white
+              "
+            >
+              Terms
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
+
     </footer>
   );
 }

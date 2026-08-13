@@ -1,98 +1,96 @@
 function AuthLayout({ children }) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050816]">
+    <div className="relative min-h-screen overflow-hidden bg-black text-white">
 
-      {/* Background Orbs */}
+      {/* ======================================
+          Subtle Ambient Light
+      ====================================== */}
 
-      <div className="bg-orb bg-orb-one" />
-      <div className="bg-orb bg-orb-two" />
-      <div className="bg-orb bg-orb-three" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-0
+          h-[500px]
+          w-[700px]
+          -translate-x-1/2
+          rounded-full
+          bg-white/[0.025]
+          blur-[120px]
+        "
+      />
 
       <div className="relative z-10 min-h-screen">
 
-        <div className="max-w-7xl mx-auto min-h-screen px-8">
+        <div className="mx-auto flex min-h-screen max-w-7xl items-center px-6 py-12 sm:px-8 lg:px-12">
 
-          <div className="grid lg:grid-cols-2 gap-20 items-center min-h-screen">
+          <div className="grid w-full items-center gap-16 lg:grid-cols-[1fr_420px] lg:gap-24">
 
-            {/* Left Side */}
+            {/* ======================================
+                Brand / Introduction
+            ====================================== */}
 
-            <div className="max-w-xl">
+            <div className="hidden max-w-xl lg:block">
 
-              <h1 className="text-7xl font-black leading-tight">
+              <p className="mb-6 text-sm font-medium uppercase tracking-[0.25em] text-neutral-500">
+                HealthLens
+              </p>
 
-                <span className="text-white">
+              <h1 className="text-6xl font-semibold leading-[1.05] tracking-[-0.045em] text-white xl:text-7xl">
 
-                  Health
+                Healthcare,
+                <br />
 
-                </span>
-
-                <span className="text-cyan-400">
-
-                  Lens
-
+                <span className="text-neutral-500">
+                  intelligently simplified.
                 </span>
 
               </h1>
 
-              <p className="mt-8 text-2xl leading-10 text-slate-300">
-
-                Intelligent healthcare powered by Artificial Intelligence.
-
+              <p className="mt-8 max-w-lg text-lg leading-8 text-neutral-400">
+                Understand your symptoms with AI-powered
+                disease prediction and intelligent health insights.
               </p>
 
-              <p className="mt-4 text-xl leading-9 text-slate-400">
+              {/* ======================================
+                  Minimal Stats
+              ====================================== */}
 
-                Predict diseases, monitor your health, and receive
-                AI-powered insights built for the future of healthcare.
+              <div className="mt-14 flex gap-12">
 
-              </p>
-
-              {/* Stats */}
-
-              <div className="flex gap-6 mt-14">
-
-                <div className="glass-card w-44 h-36 flex flex-col justify-center px-8">
-
-                  <h2 className="text-cyan-400 text-5xl font-black">
-
+                <div>
+                  <p className="text-3xl font-semibold tracking-tight text-white">
                     500+
-
-                  </h2>
-
-                  <p className="mt-2 text-slate-400">
-
-                    Diseases
-
                   </p>
 
+                  <p className="mt-1 text-sm text-neutral-500">
+                    Conditions
+                  </p>
                 </div>
 
-                <div className="glass-card w-44 h-36 flex flex-col justify-center px-8">
+                <div className="h-12 w-px bg-white/10" />
 
-                  <h2 className="text-cyan-400 text-5xl font-black">
-
-                    97%
-
-                  </h2>
-
-                  <p className="mt-2 text-slate-400">
-
-                    Accuracy
-
+                <div>
+                  <p className="text-3xl font-semibold tracking-tight text-white">
+                    AI
                   </p>
 
+                  <p className="mt-1 text-sm text-neutral-500">
+                    Powered insights
+                  </p>
                 </div>
 
               </div>
 
             </div>
 
-            {/* Right Side */}
+            {/* ======================================
+                Authentication
+            ====================================== */}
 
-            <div className="flex justify-center lg:justify-end">
-
+            <div className="flex w-full justify-center lg:justify-end">
               {children}
-
             </div>
 
           </div>

@@ -1,27 +1,90 @@
 function WelcomeCard({ user }) {
   return (
-    <section className="relative overflow-hidden rounded-[22px] bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-6 py-5 sm:px-7 sm:py-6">
+    <section
+      className="
+        rounded-[24px]
+        border
+        border-white/[0.10]
+        bg-[#080808]
+        px-6
+        py-5
+        sm:px-7
+        sm:py-6
+      "
+    >
+      <div className="flex items-center justify-between gap-6">
 
-      <div className="relative z-10 max-w-xl">
-        <p className="text-sm font-medium text-blue-100">
-          Welcome back 👋
-        </p>
+        {/* Greeting */}
 
-        <h1 className="mt-1 text-2xl sm:text-[28px] font-bold tracking-tight text-white">
-          {user?.name || "User"}
-        </h1>
+        <div className="min-w-0">
 
-        <p className="mt-1.5 text-sm text-blue-100">
-          Here's your health overview for today.
-        </p>
+          <p
+            className="
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.25em]
+              text-neutral-600
+            "
+          >
+            WELCOME BACK
+          </p>
+
+          <h2
+            className="
+              mt-1.5
+              truncate
+              text-2xl
+              font-semibold
+              tracking-[-0.035em]
+              text-white
+              sm:text-[28px]
+            "
+          >
+            {user?.name || "User"}
+          </h2>
+
+          <p className="mt-1 text-sm text-neutral-600">
+            Here's your HealthLens activity at a glance.
+          </p>
+
+        </div>
+
+
+        {/* Minimal status */}
+
+        <div
+          className="
+            hidden
+            shrink-0
+            items-center
+            gap-2
+            rounded-full
+            border
+            border-white/[0.08]
+            bg-white/[0.025]
+            px-3
+            py-1.5
+            sm:flex
+          "
+        >
+
+          <span
+            className="
+              h-1.5
+              w-1.5
+              rounded-full
+              bg-white
+            "
+          />
+
+          <span className="text-[10px] text-neutral-500">
+            HEALTHLENS
+          </span>
+
+        </div>
+
       </div>
-
-      <div className="absolute -right-5 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-
-      <div className="absolute right-7 top-1/2 hidden -translate-y-1/2 text-5xl opacity-20 sm:block">
-        ♥
-      </div>
-
     </section>
   );
 }

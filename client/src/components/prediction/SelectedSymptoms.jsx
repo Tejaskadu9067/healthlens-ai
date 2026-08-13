@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { X } from "lucide-react";
 
 function formatSymptom(symptom) {
   return symptom
@@ -8,7 +8,7 @@ function formatSymptom(symptom) {
 
 function SelectedSymptoms({ symptoms, removeSymptom }) {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-2.5">
 
       {symptoms.map((symptom) => (
 
@@ -16,46 +16,53 @@ function SelectedSymptoms({ symptoms, removeSymptom }) {
           key={symptom}
           className="
             group
-            flex
+            inline-flex
             items-center
-            gap-3
-            px-5
-            py-3
-            rounded-full
-            bg-cyan-500/10
+            gap-2
+            rounded-xl
             border
-            border-cyan-500/30
-            text-cyan-300
+            border-white/[0.10]
+            bg-white/[0.035]
+            px-3.5
+            py-2
+            text-sm
+            text-neutral-300
             transition-all
-            duration-300
-            hover:bg-red-500/10
-            hover:border-red-500/40
-            hover:shadow-lg
-            hover:shadow-red-500/10
+            duration-200
+            hover:border-white/[0.20]
+            hover:bg-white/[0.06]
           "
         >
 
-          <Check
-            size={16}
-            className="text-cyan-400 group-hover:text-red-300"
-          />
-
-          <span className="font-medium">
+          <span>
             {formatSymptom(symptom)}
           </span>
 
+
           <button
+            type="button"
             onClick={() => removeSymptom(symptom)}
+            aria-label={`Remove ${formatSymptom(symptom)}`}
             className="
-              ml-1
+              flex
+              h-5
+              w-5
+              items-center
+              justify-center
               rounded-full
-              p-1
+              text-neutral-600
               transition-all
-              hover:bg-red-500
+              duration-200
+              hover:bg-white/[0.10]
               hover:text-white
             "
           >
-            <X size={15} />
+
+            <X
+              size={12}
+              strokeWidth={1.7}
+            />
+
           </button>
 
         </div>

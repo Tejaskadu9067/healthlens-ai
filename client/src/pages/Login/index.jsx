@@ -107,10 +107,8 @@ function Login() {
 
       console.log("OTP sent successfully.");
 
-      // Store Firebase confirmation result
       window.confirmationResult = confirmationResult;
 
-      // Move to OTP screen
       navigate("/verify-otp", {
         state: {
           phone,
@@ -119,9 +117,6 @@ function Login() {
 
     } catch (error) {
       console.error("Phone OTP Error:", error);
-
-      // If reCAPTCHA has already been rendered,
-      // completely reset it.
 
       if (
         error.message?.includes(
@@ -139,7 +134,8 @@ function Login() {
         }
       }
 
-      let message = "Unable to send OTP. Please try again.";
+      let message =
+        "Unable to send OTP. Please try again.";
 
       if (
         error.code ===
@@ -176,13 +172,17 @@ function Login() {
     <AuthLayout>
       <AuthCard>
 
-        {/* Google */}
+        {/* ======================================
+            Google
+        ====================================== */}
 
         <GoogleButton variant="auth" />
 
         <Divider />
 
-        {/* Phone */}
+        {/* ======================================
+            Phone
+        ====================================== */}
 
         <div className="space-y-5">
 
@@ -194,7 +194,7 @@ function Login() {
           />
 
           {error && (
-            <p className="text-sm text-red-400">
+            <p className="text-sm text-neutral-400">
               {error}
             </p>
           )}
@@ -203,14 +203,17 @@ function Login() {
             onClick={handleContinue}
             disabled={loading}
             className="
-              bg-gradient-to-r
-              from-cyan-500
-              to-blue-600
-              text-white
-              shadow-lg
-              shadow-cyan-500/20
-              disabled:opacity-60
+              border
+              border-white
+              bg-white
+              text-black
+              shadow-none
+              transition-all
+              duration-300
+              hover:bg-neutral-200
+              hover:border-neutral-200
               disabled:cursor-not-allowed
+              disabled:opacity-50
             "
           >
             {loading
@@ -218,22 +221,28 @@ function Login() {
               : "Continue"}
 
             {!loading && (
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="h-5 w-5" />
             )}
           </AuthButton>
 
         </div>
 
-        {/* reCAPTCHA */}
+        {/* ======================================
+            reCAPTCHA
+        ====================================== */}
 
         <div
           id="recaptcha-container"
           className="mt-4"
         />
 
+        {/* ======================================
+            Register
+        ====================================== */}
+
         <div className="mt-10 text-center">
 
-          <span className="text-slate-400">
+          <span className="text-neutral-600">
             New to HealthLens?
           </span>
 
@@ -241,9 +250,11 @@ function Login() {
             to="/register"
             className="
               ml-2
-              text-cyan-400
-              hover:text-cyan-300
               font-semibold
+              text-neutral-300
+              transition-colors
+              duration-300
+              hover:text-white
             "
           >
             Create Account

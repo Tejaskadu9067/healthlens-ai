@@ -1,86 +1,118 @@
 import { Link } from "react-router-dom";
 
-import Badge from "../ui/Badge";
-import Button from "../ui/Button";
-import HeroDashboard from "./HeroDashboard";
-
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-6xl items-center gap-6 px-5 py-7 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:gap-8 lg:px-8 lg:py-9">
+    <section className="relative overflow-hidden bg-black text-white">
+      <div className="mx-auto flex min-h-[calc(100vh-96px)] max-w-7xl flex-col items-center justify-center px-6 py-24 text-center sm:px-8 lg:px-12">
 
-        {/* LEFT */}
+        {/* Eyebrow */}
 
-        <div className="max-w-[500px] text-white">
+        <p
+          className="
+            mb-8
+            text-[11px]
+            font-medium
+            uppercase
+            tracking-[0.28em]
+            text-[#86868B]
+          "
+        >
+          Health intelligence
+        </p>
 
-          <Badge>
-            🚀 AI Powered Healthcare
-          </Badge>
 
-          <h1 className="mt-4 text-[40px] font-black leading-[0.98] tracking-[-0.045em] sm:text-[46px] lg:text-[52px]">
+        {/* Main Heading */}
 
-            AI-Powered
+        <h1
+          className="
+            max-w-5xl
+            text-6xl
+            font-semibold
+            leading-[0.95]
+            tracking-[-0.055em]
+            sm:text-7xl
+            md:text-8xl
+            lg:text-[112px]
+          "
+        >
+          Your health.
+          <br />
+          <span className="text-[#86868B]">
+            Understood.
+          </span>
+        </h1>
 
-            <span className="block bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 bg-clip-text text-transparent">
-              Disease Prediction
-            </span>
 
-          </h1>
+        {/* Description */}
 
-          <p className="mt-4 max-w-[450px] text-[13px] leading-6 text-slate-400">
-            Detect diseases intelligently using Machine Learning,
-            Explainable AI and modern clinical decision support.
-            Fast, secure and built for the future of healthcare.
-          </p>
+        <p
+          className="
+            mt-10
+            max-w-xl
+            text-base
+            leading-7
+            text-[#86868B]
+            sm:text-lg
+            sm:leading-8
+          "
+        >
+          Understand your symptoms with AI-assisted
+          health analysis designed to give you a
+          clearer picture of what they may indicate.
+        </p>
 
-          <div className="mt-5 flex gap-2.5">
 
-            <Link to="/prediction">
-              <Button className="rounded-lg px-5 py-2.5 text-xs">
-                Start Diagnosis
-              </Button>
-            </Link>
+        {/* CTA */}
 
-            <Button
-              variant="secondary"
-              className="rounded-lg px-5 py-2.5 text-xs"
-            >
-              Watch Demo
-            </Button>
+        <div className="mt-10">
 
-          </div>
+          <Link
+            to="/prediction"
+            className="
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              bg-white
+              px-7
+              py-3.5
+              text-sm
+              font-medium
+              text-black
+              transition-all
+              duration-500
+              hover:scale-[1.02]
+              hover:bg-[#E5E5E5]
+            "
+          >
+            Begin assessment
+            <span aria-hidden="true">→</span>
+          </Link>
 
         </div>
 
 
-        {/* RIGHT */}
+        {/* Scroll indicator */}
 
-        <div className="relative flex items-center justify-center lg:justify-end">
+        <div
+          className="
+            absolute
+            bottom-8
+            left-1/2
+            flex
+            -translate-x-1/2
+            flex-col
+            items-center
+            gap-3
+            text-[#6E6E73]
+          "
+        >
 
-          {/* Smaller glow */}
+          <span className="text-[10px] uppercase tracking-[0.2em]">
+            Explore
+          </span>
 
-          <div
-            className="
-              pointer-events-none
-              absolute
-              right-5
-              top-1/2
-              h-[300px]
-              w-[300px]
-              -translate-y-1/2
-              rounded-full
-              bg-cyan-500/10
-              blur-[90px]
-            "
-          />
-
-          {/* IMPORTANT:
-              Constrain the actual dashboard.
-          */}
-
-          <div className="relative z-10 w-full max-w-[480px] scale-[0.92] origin-right sm:scale-95 lg:scale-100">
-            <HeroDashboard />
-          </div>
+          <span className="h-8 w-px bg-[#38383A]" />
 
         </div>
 

@@ -3,13 +3,7 @@ import Footer from "./Footer";
 
 function AppLayout({ children }) {
   return (
-    <div className="relative min-h-screen bg-[#020617] text-white overflow-x-hidden">
-
-      {/* Background Orbs */}
-
-      <div className="bg-orb bg-orb-one" />
-      <div className="bg-orb bg-orb-two" />
-      <div className="bg-orb bg-orb-three" />
+    <div className="relative min-h-screen bg-black text-white overflow-x-hidden">
 
       <div className="relative z-10 flex min-h-screen flex-col">
 

@@ -15,77 +15,167 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navClass = ({ isActive }) =>
-    `relative font-medium transition-all duration-300 hover:-translate-y-0.5 ${
-      isActive
-        ? "text-cyan-400"
-        : "text-slate-300 hover:text-cyan-400"
-    }`;
+    `
+      relative
+      text-[14px]
+      font-medium
+      tracking-[-0.01em]
+      transition-all
+      duration-300
+      ${
+        isActive
+          ? "text-white"
+          : "text-neutral-500 hover:text-white"
+      }
+    `;
 
   return (
-    <header className="px-4 pt-4 sm:px-6 lg:px-8">
+    <header className="relative z-[100] px-4 pt-4 sm:px-6 lg:px-8">
+
+      {/* ======================================
+          OUTER GLOW
+      ====================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-4
+          h-[70px]
+          w-[85%]
+          -translate-x-1/2
+          rounded-full
+          bg-white/[0.035]
+          blur-3xl
+        "
+      />
+
       <nav
         className="
+          relative
+          z-[100]
           mx-auto
           max-w-7xl
-          rounded-[28px]
+          rounded-[24px]
           border
-          border-white/10
-          bg-slate-900/70
+          border-white/[0.16]
+          bg-[#080808]/90
+          shadow-[0_0_35px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.08)]
           backdrop-blur-2xl
-          shadow-[0_0_45px_rgba(6,182,212,0.10)]
         "
       >
-        <div className="flex h-20 items-center justify-between px-6 lg:px-8">
+
+        {/* ======================================
+            INNER CURVED HIGHLIGHT
+        ====================================== */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-[1px]
+            rounded-[23px]
+            border
+            border-white/[0.035]
+          "
+        />
+
+        <div
+          className="
+            relative
+            flex
+            h-[68px]
+            items-center
+            justify-between
+            px-5
+            sm:px-7
+            lg:px-8
+          "
+        >
 
           {/* ======================================
-              Logo
+              LOGO
           ====================================== */}
 
           <Link
             to="/"
-            className="flex items-center gap-3"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+            "
           >
+
             <div
               className="
                 flex
-                h-12
-                w-12
+                h-9
+                w-9
                 items-center
                 justify-center
-                rounded-2xl
-                bg-gradient-to-br
-                from-cyan-500
-                to-blue-600
-                shadow-lg
-                shadow-blue-600/20
+                rounded-full
+                bg-white
+                shadow-[0_0_18px_rgba(255,255,255,0.12)]
+                transition-transform
+                duration-300
+                group-hover:scale-105
               "
             >
-              <Activity className="h-6 w-6 text-white" />
+              <Activity
+                className="
+                  h-[18px]
+                  w-[18px]
+                  stroke-[2.5]
+                  text-black
+                "
+              />
             </div>
 
             <div>
+
               <h1
                 className="
-                  text-2xl
-                  font-extrabold
-                  tracking-tight
-                  text-cyan-400
+                  text-[17px]
+                  font-semibold
+                  tracking-[-0.04em]
+                  text-white
                 "
               >
                 HealthLens
               </h1>
 
-              <p className="text-[11px] font-medium tracking-wide text-slate-400">
-                AI HEALTHCARE
+              <p
+                className="
+                  mt-[-1px]
+                  text-[8px]
+                  font-medium
+                  uppercase
+                  tracking-[0.18em]
+                  text-neutral-600
+                "
+              >
+                AI Healthcare
               </p>
+
             </div>
+
           </Link>
 
+
           {/* ======================================
-              Navigation
+              NAVIGATION
           ====================================== */}
 
-          <div className="hidden items-center gap-9 text-[15px] lg:flex">
+          <div
+            className="
+              hidden
+              items-center
+              gap-8
+              lg:flex
+            "
+          >
 
             <NavLink
               to="/"
@@ -117,61 +207,55 @@ function Navbar() {
 
           </div>
 
+
           {/* ======================================
-              Right Side
+              RIGHT SIDE
           ====================================== */}
 
           {!user ? (
 
-            /* Login Button */
-
             <Link
               to="/login"
               className="
-                inline-flex
-                items-center
-                justify-center
-                rounded-xl
-                bg-gradient-to-r
-                from-cyan-500
-                to-blue-600
+                rounded-full
+                bg-white
                 px-5
-                py-2.5
-                text-sm
+                py-2
+                text-[13px]
                 font-semibold
-                text-white
-                shadow-lg
-                shadow-cyan-500/20
+                text-black
+                shadow-[0_0_20px_rgba(255,255,255,0.08)]
                 transition-all
                 duration-300
-                hover:-translate-y-0.5
-                hover:shadow-cyan-500/30
+                hover:bg-neutral-200
+                hover:shadow-[0_0_25px_rgba(255,255,255,0.12)]
               "
             >
-              Login
+              Sign in
             </Link>
 
           ) : (
 
-            /* Logged-in User */
-
-            <div className="relative">
+            <div className="relative z-[200]">
 
               <button
                 onClick={() => setOpen(!open)}
+                aria-expanded={open}
                 className="
+                  group
                   flex
                   items-center
-                  gap-3
-                  rounded-2xl
+                  gap-2.5
+                  rounded-full
                   border
-                  border-white/10
-                  bg-slate-800/70
-                  px-3
-                  py-2
+                  border-white/[0.08]
+                  bg-white/[0.035]
+                  px-2
+                  py-1.5
                   transition-all
                   duration-300
-                  hover:bg-slate-800
+                  hover:border-white/[0.16]
+                  hover:bg-white/[0.06]
                 "
               >
 
@@ -179,36 +263,60 @@ function Navbar() {
                   src={user.picture}
                   alt={user.name}
                   className="
-                    h-10
-                    w-10
+                    h-8
+                    w-8
                     rounded-full
-                    border-2
-                    border-cyan-400
+                    grayscale
+                    transition-all
+                    duration-300
+                    group-hover:grayscale-0
                   "
                 />
 
                 <div className="hidden text-left md:block">
 
-                  <h2 className="text-sm font-bold text-white">
+                  <h2
+                    className="
+                      max-w-[120px]
+                      truncate
+                      text-[12px]
+                      font-semibold
+                      text-white
+                    "
+                  >
                     {user.name}
                   </h2>
 
-                  <p className="max-w-[150px] truncate text-xs text-slate-400">
+                  <p
+                    className="
+                      max-w-[120px]
+                      truncate
+                      text-[10px]
+                      text-neutral-500
+                    "
+                  >
                     {user.email}
                   </p>
 
                 </div>
 
                 <ChevronDown
-                  className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${
-                    open ? "rotate-180" : ""
-                  }`}
+                  className={`
+                    mr-1
+                    h-3.5
+                    w-3.5
+                    text-neutral-500
+                    transition-transform
+                    duration-300
+                    ${open ? "rotate-180" : ""}
+                  `}
                 />
 
               </button>
 
+
               {/* ======================================
-                  User Dropdown
+                  USER DROPDOWN
               ====================================== */}
 
               {open && (
@@ -217,38 +325,61 @@ function Navbar() {
                   className="
                     absolute
                     right-0
-                    z-50
+                    top-full
+                    z-[9999]
                     mt-3
                     w-64
                     overflow-hidden
                     rounded-2xl
                     border
-                    border-white/10
-                    bg-slate-900/95
-                    shadow-2xl
+                    border-white/[0.12]
+                    bg-[#111111]/95
+                    shadow-[0_25px_80px_rgba(0,0,0,0.7)]
                     backdrop-blur-2xl
                   "
                 >
 
-                  {/* User Info */}
-
-                  <div className="border-b border-white/10 p-4">
+                  <div
+                    className="
+                      border-b
+                      border-white/[0.07]
+                      p-4
+                    "
+                  >
 
                     <div className="flex items-center gap-3">
 
                       <img
                         src={user.picture}
                         alt={user.name}
-                        className="h-11 w-11 rounded-full"
+                        className="
+                          h-10
+                          w-10
+                          rounded-full
+                          grayscale
+                        "
                       />
 
                       <div className="min-w-0">
 
-                        <h2 className="truncate font-bold text-white">
+                        <h2
+                          className="
+                            truncate
+                            text-sm
+                            font-semibold
+                            text-white
+                          "
+                        >
                           {user.name}
                         </h2>
 
-                        <p className="truncate text-xs text-slate-400">
+                        <p
+                          className="
+                            truncate
+                            text-xs
+                            text-neutral-500
+                          "
+                        >
                           {user.email}
                         </p>
 
@@ -258,7 +389,6 @@ function Navbar() {
 
                   </div>
 
-                  {/* Menu */}
 
                   <div className="p-2">
 
@@ -272,10 +402,10 @@ function Navbar() {
                         rounded-xl
                         px-3
                         py-2.5
-                        text-sm
-                        text-slate-300
+                        text-[13px]
+                        text-neutral-400
                         transition
-                        hover:bg-slate-800
+                        hover:bg-white/[0.06]
                         hover:text-white
                       "
                     >
@@ -293,16 +423,18 @@ function Navbar() {
                         rounded-xl
                         px-3
                         py-2.5
-                        text-sm
-                        text-slate-300
+                        text-[13px]
+                        text-neutral-400
                         transition
-                        hover:bg-slate-800
+                        hover:bg-white/[0.06]
                         hover:text-white
                       "
                     >
                       <History className="h-4 w-4" />
                       Prediction History
                     </Link>
+
+                    <div className="my-1 border-t border-white/[0.06]" />
 
                     <button
                       onClick={() => {
@@ -317,15 +449,15 @@ function Navbar() {
                         rounded-xl
                         px-3
                         py-2.5
-                        text-sm
-                        text-red-400
+                        text-[13px]
+                        text-neutral-500
                         transition
-                        hover:bg-red-500
+                        hover:bg-white/[0.06]
                         hover:text-white
                       "
                     >
                       <LogOut className="h-4 w-4" />
-                      Logout
+                      Sign out
                     </button>
 
                   </div>
@@ -339,7 +471,9 @@ function Navbar() {
           )}
 
         </div>
+
       </nav>
+
     </header>
   );
 }

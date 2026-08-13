@@ -1,55 +1,91 @@
+import { ArrowRight } from "lucide-react";
+
 function PredictButton({
   onClick,
   disabled,
   loading = false,
 }) {
+  const isDisabled = disabled || loading;
+
   return (
     <button
+      type="button"
       onClick={onClick}
-      disabled={disabled || loading}
+      disabled={isDisabled}
       className="
+        group
+        flex
         w-full
+        items-center
+        justify-center
+        gap-3
         rounded-2xl
-        py-5
-        text-lg
+        bg-white
+        px-5
+        py-3.5
+        text-sm
         font-semibold
+        tracking-[-0.01em]
+        text-black
         transition-all
         duration-300
-        shadow-lg
+        hover:bg-neutral-200
+        active:scale-[0.99]
         disabled:cursor-not-allowed
-        disabled:opacity-60
-        enabled:hover:scale-[1.02]
-        enabled:hover:shadow-cyan-500/30
-        enabled:active:scale-100
-        bg-linear-to-r
-        from-cyan-500
-        to-blue-600
-        text-white
+        disabled:bg-neutral-800
+        disabled:text-neutral-600
       "
     >
-      {loading ? (
-        <div className="flex items-center justify-center gap-3">
 
-          <div
+      {loading ? (
+
+        <div className="flex items-center gap-3">
+
+          <span
             className="
-              w-5
-              h-5
-              border-2
-              border-white
-              border-t-transparent
-              rounded-full
+              h-4
+              w-4
               animate-spin
+              rounded-full
+              border-2
+              border-neutral-400
+              border-t-transparent
             "
           />
 
-          <span>Analyzing Symptoms...</span>
+          <span>
+            Analysing symptoms...
+          </span>
 
         </div>
+
       ) : disabled ? (
-        "Select at Least 3 Symptoms"
+
+        <span>
+          Select at least 3 symptoms
+        </span>
+
       ) : (
-        "Predict Disease"
+
+        <>
+          <span>
+            Analyse symptoms
+          </span>
+
+          <ArrowRight
+            className="
+              h-4
+              w-4
+              transition-transform
+              duration-300
+              group-hover:translate-x-1
+            "
+            strokeWidth={1.8}
+          />
+        </>
+
       )}
+
     </button>
   );
 }

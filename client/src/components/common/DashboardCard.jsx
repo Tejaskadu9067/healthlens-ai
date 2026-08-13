@@ -5,13 +5,14 @@ function DashboardCard({
   return (
     <div
       className={`
-        rounded-3xl
+        rounded-[24px]
         border
-        border-slate-800
-        bg-slate-900/70
-        shadow-xl
-        backdrop-blur-xl
-        p-6
+        border-white/[0.10]
+        bg-[#080808]
+        p-5
+        transition-colors
+        duration-300
+        hover:border-white/[0.16]
         ${className}
       `}
     >

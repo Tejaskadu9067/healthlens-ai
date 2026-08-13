@@ -1,3 +1,4 @@
+import { Stethoscope } from "lucide-react";
 import DashboardCard from "../common/DashboardCard";
 
 function DescriptionCard({
@@ -9,45 +10,107 @@ function DescriptionCard({
   return (
     <DashboardCard>
 
-      <h3 className="text-xl font-semibold text-cyan-400 mb-5">
-        📖 Disease Information
-      </h3>
+      {/* Header */}
 
-      <div className="space-y-6">
+      <div>
+        <p
+          className="
+            text-[10px]
+            font-medium
+            uppercase
+            tracking-[0.25em]
+            text-neutral-600
+          "
+        >
+          INSIGHT
+        </p>
 
-        <div>
+        <h3
+          className="
+            mt-1.5
+            text-lg
+            font-semibold
+            tracking-[-0.025em]
+            text-white
+          "
+        >
+          About this condition
+        </h3>
+      </div>
 
-          <h4 className="text-sm uppercase tracking-wide text-slate-500 mb-2">
-            Description
-          </h4>
 
-          <p className="text-slate-300 leading-7">
-            {description}
+      {/* Description */}
+
+      <p
+        className="
+          mt-5
+          text-sm
+          leading-6
+          text-neutral-400
+        "
+      >
+        {description}
+      </p>
+
+
+      {/* Recommended Specialist */}
+
+      {specialist && (
+        <div
+          className="
+            mt-6
+            border-t
+            border-white/[0.07]
+            pt-5
+          "
+        >
+          <p
+            className="
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.22em]
+              text-neutral-600
+            "
+          >
+            RECOMMENDED SPECIALIST
           </p>
 
-        </div>
+          <div className="mt-3 flex items-center gap-3">
 
-        <div className="border-t border-slate-800 pt-5">
-
-          <h4 className="text-sm uppercase tracking-wide text-slate-500 mb-2">
-            Recommended Specialist
-          </h4>
-
-          <div className="flex items-center gap-3">
-
-            <div className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center">
-              👨‍⚕️
+            <div
+              className="
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-white/[0.10]
+                bg-white/[0.035]
+              "
+            >
+              <Stethoscope
+                className="h-4 w-4 text-neutral-400"
+                strokeWidth={1.5}
+              />
             </div>
 
-            <span className="text-white font-medium">
+            <span
+              className="
+                text-sm
+                font-medium
+                text-neutral-300
+              "
+            >
               {specialist}
             </span>
 
           </div>
-
         </div>
-
-      </div>
+      )}
 
     </DashboardCard>
   );

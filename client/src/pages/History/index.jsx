@@ -3,6 +3,8 @@ import {
   Clock3,
   Trash2,
   RotateCcw,
+  ArrowUpRight,
+  Activity,
 } from "lucide-react";
 
 import {
@@ -18,43 +20,36 @@ import {
   deletePrediction as deletePredictionAPI,
 } from "../../services/predictionService";
 
-function History() {
+function formatSymptom(symptom) {
+  return symptom
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
 
+function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [deleteModal, setDeleteModal] = useState(null);
 
   useEffect(() => {
-
     loadHistory();
-
   }, []);
 
   async function loadHistory() {
-
     try {
-
       const data = await getPredictionHistory();
 
       setHistory(data.predictions);
-
     } catch (error) {
-
       console.error(error);
-
     } finally {
-
       setLoading(false);
-
     }
-
   }
 
   async function handleDelete() {
-
     try {
-
       await deletePredictionAPI(deleteModal._id);
 
       setHistory((prev) =>
@@ -64,23 +59,17 @@ function History() {
       );
 
       setDeleteModal(null);
-
     } catch (error) {
-
       console.error(error);
-
     }
-
   }
 
   const filteredHistory = useMemo(() => {
-
     return history.filter((item) =>
       item.disease
         .toLowerCase()
         .includes(search.toLowerCase())
     );
-
   }, [history, search]);
 
   const totalPredictions = history.length;
@@ -98,10 +87,8 @@ function History() {
   const diseaseCount = {};
 
   history.forEach((item) => {
-
     diseaseCount[item.disease] =
       (diseaseCount[item.disease] || 0) + 1;
-
   });
 
   const mostPredicted =
@@ -111,223 +98,427 @@ function History() {
           diseaseCount[a] > diseaseCount[b] ? a : b
         );
 
+  /* ======================================
+     LOADING
+  ====================================== */
+
   if (loading) {
-
     return (
+      <main className="mx-auto max-w-6xl px-5 py-10 sm:px-6">
 
-      <div className="flex justify-center py-24">
+        <div className="animate-pulse space-y-4">
 
-        <p className="text-xl text-white">
+          <div className="h-20 rounded-[24px] bg-white/[0.04]" />
 
-          Loading prediction history...
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
 
-        </p>
-
-      </div>
-
-    );
-
-  }
-
-  return (
-
-    <div className="max-w-7xl mx-auto px-6 pb-20">
-
-      {/* Heading */}
-
-      <div className="mb-12">
-
-        <h1 className="text-5xl font-extrabold text-white">
-
-          Prediction History
-
-        </h1>
-
-        <p className="mt-3 text-slate-400 text-lg">
-
-          View all your previous AI disease predictions.
-
-        </p>
-
-      </div>
-
-      {/* Stats */}
-
-      <div className="grid md:grid-cols-3 gap-6 mb-10">
-
-        <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-6">
-
-          <p className="text-slate-400">
-
-            Total Predictions
-
-          </p>
-
-          <h2 className="text-4xl font-bold mt-3 text-cyan-400">
-
-            {totalPredictions}
-
-          </h2>
-
-        </div>
-
-        <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-6">
-
-          <p className="text-slate-400">
-
-            Average Confidence
-
-          </p>
-
-          <h2 className="text-4xl font-bold mt-3 text-emerald-400">
-
-            {averageConfidence}%
-
-          </h2>
-
-        </div>
-
-        <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-6">
-
-          <p className="text-slate-400">
-
-            Most Predicted
-
-          </p>
-
-          <h2 className="text-3xl font-bold mt-3 text-white">
-
-            {mostPredicted}
-
-          </h2>
-
-        </div>
-
-      </div>
-
-      {/* Search */}
-
-      <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-5 mb-10">
-
-        <div className="flex items-center gap-3">
-
-          <Search className="w-5 h-5 text-cyan-400" />
-
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search prediction..."
-            className="flex-1 bg-transparent outline-none text-white placeholder:text-slate-500"
-          />
-
-        </div>
-
-      </div>
-
-      {/* Empty State */}
-
-      {filteredHistory.length === 0 ? (
-
-        <div className="rounded-3xl border border-dashed border-cyan-500/30 bg-slate-900/60 p-16 text-center">
-
-          <div className="text-6xl">
-
-            🩺
+            {[1, 2, 3].map((item) => (
+              <div
+                key={item}
+                className="h-24 rounded-[20px] bg-white/[0.04]"
+              />
+            ))}
 
           </div>
 
-          <h2 className="mt-6 text-3xl font-bold text-white">
+          <div className="h-14 rounded-[20px] bg-white/[0.04]" />
 
-            No Predictions Found
+          <div className="h-52 rounded-[24px] bg-white/[0.04]" />
 
-          </h2>
+        </div>
 
-          <p className="mt-4 text-slate-400">
+      </main>
+    );
+  }
 
-            Start your first AI diagnosis to build your prediction history.
+  return (
+    <main
+      className="
+        mx-auto
+        max-w-6xl
+        px-5
+        pb-20
+        pt-8
+        sm:px-6
+        lg:pt-10
+      "
+    >
 
-          </p>
+      {/* ======================================
+          PAGE HEADER
+      ====================================== */}
 
-          <Link to="/prediction">
+      <header className="mb-6">
 
-            <button className="mt-8 px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-105 transition-all">
+        <p
+          className="
+            text-[10px]
+            font-medium
+            uppercase
+            tracking-[0.25em]
+            text-neutral-600
+          "
+        >
+          HEALTH RECORD
+        </p>
 
-              Start Prediction
+        <div className="mt-2 flex items-end justify-between gap-6">
 
-            </button>
+          <div>
 
+            <h1
+              className="
+                text-3xl
+                font-semibold
+                tracking-[-0.04em]
+                text-white
+                sm:text-4xl
+              "
+            >
+              Prediction history
+            </h1>
+
+            <p className="mt-2 text-sm text-neutral-600">
+              Review your previous HealthLens assessments.
+            </p>
+
+          </div>
+
+          <Link
+            to="/prediction"
+            className="
+              hidden
+              shrink-0
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-white/[0.10]
+              bg-white/[0.04]
+              px-4
+              py-2
+              text-xs
+              font-medium
+              text-neutral-300
+              transition-all
+              duration-300
+              hover:border-white/[0.18]
+              hover:bg-white/[0.07]
+              hover:text-white
+              sm:flex
+            "
+          >
+            New assessment
+            <ArrowUpRight
+              className="h-3.5 w-3.5"
+              strokeWidth={1.5}
+            />
           </Link>
 
         </div>
 
+      </header>
+
+
+      {/* ======================================
+          SUMMARY
+      ====================================== */}
+
+      <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+
+        <HistoryStat
+          label="Assessments"
+          value={totalPredictions}
+        />
+
+        <HistoryStat
+          label="Average confidence"
+          value={`${averageConfidence}%`}
+        />
+
+        <HistoryStat
+          label="Most predicted"
+          value={mostPredicted}
+          compact
+        />
+
+      </section>
+
+
+      {/* ======================================
+          SEARCH
+      ====================================== */}
+
+      <div
+        className="
+          mt-4
+          flex
+          items-center
+          gap-3
+          rounded-[20px]
+          border
+          border-white/[0.10]
+          bg-[#080808]
+          px-4
+          py-3.5
+          transition-colors
+          duration-300
+          focus-within:border-white/[0.18]
+        "
+      >
+
+        <Search
+          className="h-4 w-4 shrink-0 text-neutral-600"
+          strokeWidth={1.5}
+        />
+
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search assessments..."
+          className="
+            min-w-0
+            flex-1
+            bg-transparent
+            text-sm
+            text-white
+            outline-none
+            placeholder:text-neutral-700
+          "
+        />
+
+        {search && (
+          <button
+            onClick={() => setSearch("")}
+            className="
+              text-[10px]
+              text-neutral-600
+              transition
+              hover:text-white
+            "
+          >
+            Clear
+          </button>
+        )}
+
+      </div>
+
+
+      {/* ======================================
+          EMPTY STATE
+      ====================================== */}
+
+      {filteredHistory.length === 0 ? (
+
+        <section
+          className="
+            mt-4
+            flex
+            min-h-[260px]
+            flex-col
+            items-center
+            justify-center
+            rounded-[24px]
+            border
+            border-white/[0.10]
+            bg-[#080808]
+            px-6
+            text-center
+          "
+        >
+
+          <Activity
+            className="h-6 w-6 text-neutral-700"
+            strokeWidth={1.4}
+          />
+
+          <h2 className="mt-4 text-lg font-medium text-white">
+            {search
+              ? "No matching assessments"
+              : "No assessments yet"}
+          </h2>
+
+          <p className="mt-1.5 max-w-sm text-sm text-neutral-600">
+            {search
+              ? "Try searching for a different condition."
+              : "Your HealthLens predictions will appear here."}
+          </p>
+
+          {!search && (
+            <Link
+              to="/prediction"
+              className="
+                mt-5
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-white/[0.12]
+                bg-white
+                px-5
+                py-2.5
+                text-xs
+                font-semibold
+                text-black
+                transition
+                hover:bg-neutral-200
+              "
+            >
+              Start assessment
+              <ArrowUpRight
+                className="h-3.5 w-3.5"
+                strokeWidth={1.8}
+              />
+            </Link>
+          )}
+
+        </section>
+
       ) : (
 
-        <div className="space-y-8">
+        /* ======================================
+           HISTORY LIST
+        ====================================== */
+
+        <section className="mt-4 space-y-3">
 
           {filteredHistory.map((item) => (
 
-            <div
+            <article
               key={item._id}
-              className="rounded-3xl border border-white/10 bg-slate-900/60 p-8 hover:border-cyan-400/30 transition-all"
+              className="
+                group
+                rounded-[24px]
+                border
+                border-white/[0.10]
+                bg-[#080808]
+                p-5
+                transition-all
+                duration-300
+                hover:border-white/[0.16]
+              "
             >
 
-              <div className="flex justify-between">
+              {/* Top */}
 
-                <div>
+              <div className="flex items-start justify-between gap-5">
 
-                  <h2 className="text-3xl font-bold text-white">
+                <div className="flex min-w-0 items-start gap-3">
 
-                    🩺 {item.disease}
+                  <div
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-white/[0.08]
+                      bg-white/[0.025]
+                    "
+                  >
+                    <Activity
+                      className="h-4 w-4 text-neutral-600"
+                      strokeWidth={1.5}
+                    />
+                  </div>
 
-                  </h2>
+                  <div className="min-w-0">
 
-                  <div className="flex items-center gap-2 mt-3 text-slate-400">
+                    <h2
+                      className="
+                        truncate
+                        text-base
+                        font-medium
+                        tracking-[-0.015em]
+                        text-white
+                        sm:text-lg
+                      "
+                    >
+                      {item.disease}
+                    </h2>
 
-                    <Clock3 className="w-4 h-4" />
+                    <div
+                      className="
+                        mt-1.5
+                        flex
+                        items-center
+                        gap-1.5
+                        text-[10px]
+                        text-neutral-700
+                      "
+                    >
+                      <Clock3
+                        className="h-3 w-3"
+                        strokeWidth={1.5}
+                      />
 
-                    {new Date(item.createdAt).toLocaleString()}
+                      {new Date(
+                        item.createdAt
+                      ).toLocaleString()}
+
+                    </div>
 
                   </div>
 
                 </div>
 
-                <div className="text-right">
 
-                  <p className="text-slate-400">
+                {/* Confidence */}
 
+                <div className="shrink-0 text-right">
+
+                  <p className="text-[10px] uppercase tracking-wider text-neutral-700">
                     Confidence
-
                   </p>
 
-                  <h2 className="text-4xl font-bold text-cyan-400">
-
+                  <p className="mt-1 text-xl font-semibold tracking-[-0.03em] text-white">
                     {item.confidence}%
-
-                  </h2>
+                  </p>
 
                 </div>
 
               </div>
 
-              <div className="mt-8">
 
-                <p className="text-slate-400 mb-3">
+              {/* Symptoms */}
 
+              <div className="mt-5 border-t border-white/[0.07] pt-4">
+
+                <p
+                  className="
+                    mb-2.5
+                    text-[10px]
+                    font-medium
+                    uppercase
+                    tracking-[0.18em]
+                    text-neutral-700
+                  "
+                >
                   Symptoms
-
                 </p>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-1.5">
 
                   {item.symptoms.map((symptom) => (
 
                     <span
                       key={symptom}
-                      className="px-4 py-2 rounded-full bg-cyan-500/10 text-cyan-300"
+                      className="
+                        rounded-full
+                        border
+                        border-white/[0.08]
+                        bg-white/[0.025]
+                        px-2.5
+                        py-1
+                        text-[10px]
+                        text-neutral-500
+                      "
                     >
-
-                      {symptom.replaceAll("_", " ")}
-
+                      {formatSymptom(symptom)}
                     </span>
 
                   ))}
@@ -336,82 +527,191 @@ function History() {
 
               </div>
 
-              <div className="flex justify-end gap-4 mt-8">
+
+              {/* Actions */}
+
+              <div
+                className="
+                  mt-5
+                  flex
+                  items-center
+                  justify-end
+                  gap-2
+                  border-t
+                  border-white/[0.07]
+                  pt-4
+                "
+              >
 
                 <Link
                   to="/prediction"
                   state={{
                     symptoms: item.symptoms,
                   }}
+                  className="
+                    inline-flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-white/[0.10]
+                    bg-white/[0.025]
+                    px-4
+                    py-2
+                    text-xs
+                    font-medium
+                    text-neutral-400
+                    transition-all
+                    duration-300
+                    hover:border-white/[0.18]
+                    hover:bg-white/[0.06]
+                    hover:text-white
+                  "
                 >
+                  <RotateCcw
+                    className="h-3.5 w-3.5"
+                    strokeWidth={1.5}
+                  />
 
-                  <button className="flex items-center gap-2 px-5 py-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500 hover:text-white transition-all">
-
-                    <RotateCcw className="w-4 h-4" />
-
-                    Predict Again
-
-                  </button>
+                  Predict again
 
                 </Link>
 
                 <button
                   onClick={() => setDeleteModal(item)}
-                  className="p-3 rounded-xl bg-red-500/10 hover:bg-red-500 hover:text-white transition-all"
+                  aria-label={`Delete ${item.disease} prediction`}
+                  className="
+                    flex
+                    h-8
+                    w-8
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-white/[0.08]
+                    text-neutral-600
+                    transition-all
+                    duration-300
+                    hover:border-white/[0.18]
+                    hover:bg-white/[0.06]
+                    hover:text-white
+                  "
                 >
-
-                  <Trash2 className="w-5 h-5" />
-
+                  <Trash2
+                    className="h-3.5 w-3.5"
+                    strokeWidth={1.5}
+                  />
                 </button>
 
               </div>
 
-            </div>
+            </article>
 
           ))}
 
-        </div>
+        </section>
 
       )}
 
-      {/* Delete Modal */}
+
+      {/* ======================================
+          DELETE MODAL
+      ====================================== */}
 
       {deleteModal && (
 
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50">
+        <div
+          className="
+            fixed
+            inset-0
+            z-[200]
+            flex
+            items-center
+            justify-center
+            bg-black/75
+            px-5
+            backdrop-blur-md
+          "
+        >
 
-          <div className="w-full max-w-md rounded-3xl bg-slate-900 border border-white/10 p-8">
+          <div
+            className="
+              w-full
+              max-w-md
+              rounded-[24px]
+              border
+              border-white/[0.12]
+              bg-[#0a0a0a]
+              p-6
+              shadow-2xl
+            "
+          >
 
-            <h2 className="text-2xl font-bold text-white">
-
-              Delete Prediction
-
-            </h2>
-
-            <p className="mt-4 text-slate-400">
-
-              Are you sure you want to delete this prediction?
-
+            <p
+              className="
+                text-[10px]
+                font-medium
+                uppercase
+                tracking-[0.2em]
+                text-neutral-600
+              "
+            >
+              REMOVE ASSESSMENT
             </p>
 
-            <div className="flex justify-end gap-4 mt-8">
+            <h2
+              className="
+                mt-2
+                text-xl
+                font-semibold
+                tracking-[-0.025em]
+                text-white
+              "
+            >
+              Delete this prediction?
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-neutral-600">
+              This assessment will be permanently removed from
+              your prediction history.
+            </p>
+
+            <div className="mt-6 flex justify-end gap-2">
 
               <button
                 onClick={() => setDeleteModal(null)}
-                className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white"
+                className="
+                  rounded-full
+                  border
+                  border-white/[0.10]
+                  px-5
+                  py-2.5
+                  text-xs
+                  font-medium
+                  text-neutral-400
+                  transition
+                  hover:bg-white/[0.05]
+                  hover:text-white
+                "
               >
-
                 Cancel
-
               </button>
 
               <button
                 onClick={handleDelete}
-                className="px-6 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white"
+                className="
+                  rounded-full
+                  bg-white
+                  px-5
+                  py-2.5
+                  text-xs
+                  font-semibold
+                  text-black
+                  transition
+                  hover:bg-neutral-200
+                "
               >
-
                 Delete
-
               </button>
 
             </div>
@@ -422,10 +722,62 @@ function History() {
 
       )}
 
-    </div>
-
+    </main>
   );
+}
 
+
+/* ======================================
+   HISTORY STAT
+====================================== */
+
+function HistoryStat({
+  label,
+  value,
+  compact = false,
+}) {
+  return (
+    <div
+      className="
+        rounded-[20px]
+        border
+        border-white/[0.10]
+        bg-[#080808]
+        px-4
+        py-4
+      "
+    >
+
+      <p
+        className="
+          text-[10px]
+          font-medium
+          uppercase
+          tracking-[0.18em]
+          text-neutral-600
+        "
+      >
+        {label}
+      </p>
+
+      <p
+        className={`
+          mt-2
+          font-semibold
+          tracking-[-0.04em]
+          text-white
+          ${
+            compact
+              ? "truncate text-lg"
+              : "text-3xl"
+          }
+        `}
+      >
+        {value}
+      </p>
+
+    </div>
+  );
 }
 
 export default History;

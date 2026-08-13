@@ -15,32 +15,84 @@ function PredictionDashboard({
   onSelectHistory,
   onClearHistory,
 }) {
+  /* ======================================
+     LOADING STATE
+  ====================================== */
+
   if (loading) {
     return (
-      <div className="sticky top-28">
-        <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 shadow-xl p-8 min-h-[720px] flex items-center justify-center">
+      <div
+        className="
+          rounded-[28px]
+          border
+          border-white/[0.10]
+          bg-[#080808]
+          p-8
+        "
+      >
+        <div
+          className="
+            flex
+            min-h-[420px]
+            items-center
+            justify-center
+          "
+        >
           <LoadingSpinner />
         </div>
       </div>
     );
   }
 
+
+  /* ======================================
+     DASHBOARD
+  ====================================== */
+
   return (
-    <div className="sticky top-28 space-y-6">
+    <div className="space-y-4">
+
+      {/* ======================================
+          PRIMARY RESULT
+      ====================================== */}
 
       <PredictionSummary
         disease={prediction?.disease}
         confidence={prediction?.confidence}
       />
 
-      <DescriptionCard
-        description={prediction?.description}
-        specialist={prediction?.specialist}
+
+      {/* ======================================
+          DESCRIPTION + TOP PREDICTIONS
+      ====================================== */}
+
+      <div className="grid gap-4 xl:grid-cols-2">
+
+        <DescriptionCard
+          description={prediction?.description}
+          specialist={prediction?.specialist}
+        />
+
+        <TopPredictionsCard
+          predictions={prediction?.top_predictions}
+        />
+
+      </div>
+
+
+      {/* ======================================
+          TREATMENT / PRECAUTIONS
+      ====================================== */}
+
+      <TreatmentCard
+        precautions={prediction?.precautions}
+        medicines={prediction?.medicines}
       />
 
-      <TopPredictionsCard
-        predictions={prediction?.top_predictions}
-      />
+
+      {/* ======================================
+          HISTORY
+      ====================================== */}
 
       <PredictionHistory
         history={history}
@@ -48,13 +100,13 @@ function PredictionDashboard({
         onClear={onClearHistory}
       />
 
+
+      {/* ======================================
+          STATUS
+      ====================================== */}
+
       <PredictionStatus
         selectedCount={selectedCount}
-      />
-
-      <TreatmentCard
-        precautions={prediction?.precautions}
-        medicines={prediction?.medicines}
       />
 
     </div>

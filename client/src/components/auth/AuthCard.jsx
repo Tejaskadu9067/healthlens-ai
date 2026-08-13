@@ -7,32 +7,61 @@ function AuthCard({
     <div
       className="
         w-full
-        max-w-md
-        glass-card
-        px-10
-        py-10
+        max-w-[420px]
+        rounded-[28px]
+        border
+        border-white/[0.10]
+        bg-[#080808]
+        px-7
+        py-8
+        shadow-[0_24px_80px_rgba(0,0,0,0.45)]
+        sm:px-9
+        sm:py-9
       "
     >
-      <div className="mb-10 text-center">
 
-        <h1 className="text-4xl font-bold text-white">
+      {/* ======================================
+          Header
+      ====================================== */}
 
-          {title}
+      {(title || subtitle) && (
+        <div className="mb-8 text-center">
 
-        </h1>
+          {title && (
+            <h1
+              className="
+                text-3xl
+                font-semibold
+                tracking-[-0.035em]
+                text-white
+              "
+            >
+              {title}
+            </h1>
+          )}
 
-        <p className="mt-3 text-slate-400 leading-7">
+          {subtitle && (
+            <p
+              className="
+                mt-2.5
+                text-sm
+                leading-6
+                text-neutral-500
+              "
+            >
+              {subtitle}
+            </p>
+          )}
 
-          {subtitle}
+        </div>
+      )}
 
-        </p>
+      {/* ======================================
+          Content
+      ====================================== */}
 
-      </div>
-
-      <div className="space-y-6">
-
+      <div className="space-y-5">
         {children}
-
       </div>
 
     </div>

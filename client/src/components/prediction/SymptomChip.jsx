@@ -1,20 +1,25 @@
 function SymptomChip({ label, onClick }) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className="
-        px-5
-        py-3
-        rounded-full
-        bg-slate-900
+        inline-flex
+        items-center
+        rounded-xl
         border
-        border-slate-700
-        text-slate-300
-        hover:bg-cyan-500
-        hover:text-white
-        hover:border-cyan-500
+        border-white/[0.10]
+        bg-white/[0.035]
+        px-3.5
+        py-2
+        text-sm
+        text-neutral-300
         transition-all
-        duration-300
+        duration-200
+        hover:border-white/[0.20]
+        hover:bg-white/[0.07]
+        hover:text-white
+        active:scale-[0.98]
       "
     >
       {label}

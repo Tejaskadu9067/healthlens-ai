@@ -4,24 +4,27 @@ function AuthButton({
   onClick,
   type = "button",
   className = "",
+  disabled = false,
 }) {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={`
-        w-full
-        h-14
-        rounded-2xl
         flex
+        h-14
+        w-full
         items-center
         justify-center
         gap-3
+        rounded-2xl
         font-semibold
         transition-all
         duration-300
-        hover:scale-[1.02]
-        active:scale-[0.98]
+        disabled:cursor-not-allowed
+        disabled:opacity-50
+        ${!disabled ? "hover:-translate-y-0.5 active:translate-y-0" : ""}
         ${className}
       `}
     >

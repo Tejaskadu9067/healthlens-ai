@@ -1,9 +1,4 @@
-import {
-  FaNotesMedical,
-  FaBullseye,
-  FaVirus,
-  FaCalendarAlt,
-} from "react-icons/fa";
+import { BarChart3, Brain, Activity, CalendarDays } from "lucide-react";
 
 function StatsCards({
   total = 0,
@@ -13,91 +8,116 @@ function StatsCards({
 }) {
   const stats = [
     {
-      title: "Predictions",
+      label: "Assessments",
       value: total,
-      subtitle: "Total assessments",
-      icon: <FaNotesMedical />,
-      iconBg: "bg-blue-50",
-      iconColor: "text-blue-600",
+      description: "Total predictions",
+      icon: BarChart3,
     },
     {
-      title: "Confidence",
+      label: "Confidence",
       value: `${averageConfidence}%`,
-      subtitle: "Average AI confidence",
-      icon: <FaBullseye />,
-      iconBg: "bg-cyan-50",
-      iconColor: "text-cyan-600",
+      description: "Average AI confidence",
+      icon: Brain,
     },
     {
-      title: "Diseases",
+      label: "Conditions",
       value: uniqueDiseases,
-      subtitle: "Conditions identified",
-      icon: <FaVirus />,
-      iconBg: "bg-violet-50",
-      iconColor: "text-violet-600",
+      description: "Conditions identified",
+      icon: Activity,
     },
     {
-      title: "This Month",
+      label: "This month",
       value: predictionsThisMonth,
-      subtitle: "Predictions this month",
-      icon: <FaCalendarAlt />,
-      iconBg: "bg-emerald-50",
-      iconColor: "text-emerald-600",
+      description: "Recent assessments",
+      icon: CalendarDays,
     },
   ];
 
   return (
     <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
 
-      {stats.map((stat) => (
-        <div
-          key={stat.title}
-          className="
-            rounded-[20px]
-            bg-white
-            px-4
-            py-4
-            shadow-[0_8px_30px_rgba(15,23,42,0.08)]
-            transition-transform
-            duration-200
-            hover:-translate-y-0.5
-          "
-        >
-          <div className="flex items-start justify-between gap-3">
+      {stats.map((stat) => {
+        const Icon = stat.icon;
 
-            <div>
-              <p className="text-xs font-medium text-slate-400">
-                {stat.title}
+        return (
+          <div
+            key={stat.label}
+            className="
+              group
+              rounded-[20px]
+              border
+              border-white/[0.09]
+              bg-[#080808]
+              px-4
+              py-4
+              transition-colors
+              duration-300
+              hover:border-white/[0.16]
+              hover:bg-white/[0.025]
+            "
+          >
+
+            {/* Top */}
+
+            <div className="flex items-center justify-between">
+
+              <p
+                className="
+                  text-[10px]
+                  font-medium
+                  uppercase
+                  tracking-[0.18em]
+                  text-neutral-600
+                "
+              >
+                {stat.label}
               </p>
 
-              <p className="mt-1 text-[26px] font-bold tracking-tight text-slate-800">
-                {stat.value}
-              </p>
+              <Icon
+                className="
+                  h-4
+                  w-4
+                  text-neutral-700
+                  transition-colors
+                  duration-300
+                  group-hover:text-neutral-400
+                "
+                strokeWidth={1.5}
+              />
 
-              <p className="mt-0.5 text-[11px] text-slate-400">
-                {stat.subtitle}
-              </p>
             </div>
 
-            <div
-              className={`
-                flex
-                h-9
-                w-9
-                shrink-0
-                items-center
-                justify-center
-                rounded-xl
-                ${stat.iconBg}
-                ${stat.iconColor}
-              `}
+
+            {/* Value */}
+
+            <p
+              className="
+                mt-3
+                text-3xl
+                font-semibold
+                tracking-[-0.04em]
+                text-white
+              "
             >
-              {stat.icon}
-            </div>
+              {stat.value}
+            </p>
+
+
+            {/* Description */}
+
+            <p
+              className="
+                mt-1
+                text-[11px]
+                text-neutral-600
+              "
+            >
+              {stat.description}
+            </p>
 
           </div>
-        </div>
-      ))}
+        );
+      })}
 
     </section>
   );
